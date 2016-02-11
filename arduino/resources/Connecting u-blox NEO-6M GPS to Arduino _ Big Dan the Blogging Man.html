@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<!-- saved from url=(0085)https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/ -->
+<html lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>Connecting u-blox NEO-6M GPS to Arduino | Big Dan the Blogging Man</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="stylesheet" type="text/css" media="all" href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/style.css">
+<link rel="pingback" href="https://bigdanzblog.wordpress.com/xmlrpc.php">
+<link rel="alternate" type="application/rss+xml" title="Big Dan the Blogging Man » Feed" href="https://bigdanzblog.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Big Dan the Blogging Man » Comments Feed" href="https://bigdanzblog.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Big Dan the Blogging Man » Connecting u-blox NEO-6M GPS to Arduino Comments Feed" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<link rel="stylesheet" id="all-css-0" href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/saved_resource" type="text/css" media="all">
+<script type="text/javascript" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/saved_resource(1)"></script><style type="text/css"></style>
+<link rel="stylesheet" id="all-css-0" href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/style(1).css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563g&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://bigdanzblog.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="CPLD/FPGA Programming for an Arduino Kind of Guy" href="https://bigdanzblog.wordpress.com/2015/01/13/cpldfpga-programming-for-an-arduino-kind-of-guy/">
+<link rel="next" title="Connecting u-blox NEO-6M GPS to Raspberry Pi" href="https://bigdanzblog.wordpress.com/2015/01/18/connecting-u-blox-neo-6m-gps-to-raspberry-pi/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man.html">
+<link rel="shortlink" href="http://wp.me/p3PlCO-jd">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&url=https%3A%2F%2Fbigdanzblog.wordpress.com%2F2015%2F01%2F15%2Fconnecting-u-blox-neo-6m-gps-to-arduino%2F&for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&url=https%3A%2F%2Fbigdanzblog.wordpress.com%2F2015%2F01%2F15%2Fconnecting-u-blox-neo-6m-gps-to-arduino%2F&for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Connecting u-blox NEO-6M GPS to Arduino">
+<meta property="og:url" content="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/">
+<meta property="og:description" content="I picked up a u-blox NEO-6M GPS like this: for $28 from yourduino.com: Connecting the GPS a PC First My first step was to connect the GPS to a PC first and make sure I could get it to work. The GPS...">
+<meta property="article:published_time" content="2015-01-15T22:42:54+00:00">
+<meta property="article:modified_time" content="2015-03-28T18:28:51+00:00">
+<meta property="og:site_name" content="Big Dan the Blogging Man">
+<meta property="og:image" content="https://bigdanzblog.files.wordpress.com/2015/01/ubox-gps-fig1.png">
+<meta property="og:image:width" content="729">
+<meta property="og:image:height" content="567">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:image" content="https://bigdanzblog.files.wordpress.com/2015/01/ubox-gps-fig1.png?w=240">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="https://s2.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="https://s0.wp.com/i/webclip.png">
+<link rel="openid.server" href="https://bigdanzblog.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://bigdanzblog.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://bigdanzblog.wordpress.com/osd.xml" title="Big Dan the Blogging Man">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Big Dan the Blogging Man"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://bigdanzblog.wordpress.com/feed/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Read Freshly Pressed;action-uri=http://wordpress.com/#fresh;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="Connecting u-blox NEO-6M GPS to Arduino | Big Dan the Blogging Man on WordPress.com">
+<meta name="description" content="I picked up a u-blox NEO-6M GPS like this: http://www.digibay.in/image/cache/data/se/432-c-ublox-neo-6m-gps-module-with-active-antenna-600x600.jpg for $28 from yourduino.com: http://yourduino.com/sunshop2/index.php?l=product_detail&amp;p=389 Connecting the GPS a PC First My first step was to connect the GPS to a PC first and make sure I could get it to work. The GPS outputs TTL serial data. So I just needed to connect the…">
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+<style type="text/css" media="screen">
+	html { margin-top: 32px !important; }
+	* html body { margin-top: 32px !important; }
+	@media screen and ( max-width: 782px ) {
+		html { margin-top: 46px !important; }
+		* html body { margin-top: 46px !important; }
+	}
+</style>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+<link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/services.css"></head>
+
+<body class="single single-post postid-1191 single-format-standard logged-in admin-bar no-customize-support mp6 customizer-styles-applied single-author highlander-enabled highlander-light" cz-shortcut-listen="true">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="https://bigdanzblog.wordpress.com/" title="Big Dan the Blogging Man" rel="home">Big Dan the Blogging Man</a>
+					</span>
+				</div>
+				<div id="site-description"></div>
+
+										<a class="home-link" href="https://bigdanzblog.wordpress.com/" title="Big Dan the Blogging Man" rel="home">
+							<img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/lighthouse22.jpg" width="940" height="198" alt="">
+						</a>
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu-header"><ul id="menu-menu-1" class="menu"><li id="menu-item-1440" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1440"><a href="https://bigdanzblog.wordpress.com/">Home</a></li>
+<li id="menu-item-1444" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1444"><a href="https://bigdanzblog.wordpress.com/test/">Contents</a></li>
+<li id="menu-item-1441" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1441"><a href="https://bigdanzblog.wordpress.com/about/">About</a></li>
+<li id="menu-item-1442" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1442"><a href="https://bigdanzblog.wordpress.com/documents/">Documents</a></li>
+<li id="menu-item-1443" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1443"><a href="https://bigdanzblog.wordpress.com/full-list-of-posts/">Index</a></li>
+</ul></div>			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="https://bigdanzblog.wordpress.com/2015/01/13/cpldfpga-programming-for-an-arduino-kind-of-guy/" rel="prev"><span class="meta-nav">←</span> CPLD/FPGA Programming for an Arduino Kind of&nbsp;Guy</a></div>
+					<div class="nav-next"><a href="https://bigdanzblog.wordpress.com/2015/01/18/connecting-u-blox-neo-6m-gps-to-raspberry-pi/" rel="next">Connecting u-blox NEO-6M GPS to Raspberry&nbsp;Pi <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-1191" class="post-1191 post type-post status-publish format-standard hentry category-c-arduino tag-gps tag-gps-arduino">
+											<h2 class="entry-title"><a href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man.html" rel="bookmark">Connecting u-blox NEO-6M GPS to&nbsp;Arduino</a></h2>					
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man.html" title="2:42 pm" rel="bookmark"><span class="entry-date">January 15, 2015</span></a>						<span class="by-author"><span class="sep">by</span> <span class="author vcard"><a class="url fn n" href="https://bigdanzblog.wordpress.com/author/dantheman60/" title="View all posts by Dan TheMan" rel="author">Dan TheMan</a></span> </span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p>I picked up a u-blox NEO-6M GPS like this:</p>
+<p><a href="http://www.digibay.in/image/cache/data/se/432-c-ublox-neo-6m-gps-module-with-active-antenna-600x600.jpg"><img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/432-c-ublox-neo-6m-gps-module-with-active-antenna-600x600.jpg" style="max-width:100%;"></a></p>
+<p>for $28 from yourduino.com:</p>
+<p><a href="http://yourduino.com/sunshop2/index.php?l=product_detail&p=389" rel="nofollow">http://yourduino.com/sunshop2/index.php?l=product_detail&amp;p=389</a></p>
+<p><strong>Connecting the GPS a PC First</strong></p>
+<p>My first step was to connect the GPS to a PC first and make sure I could get it to work. The GPS outputs TTL serial data. So I just needed to connect the GPS to an FTDI to USB cable. You can pickup such a cable here if you don’t already have one:</p>
+<p><a href="https://www.sparkfun.com/products/9718" rel="nofollow">https://www.sparkfun.com/products/9718</a></p>
+<p>My basic clues to make this happen were found here:</p>
+<p><a href="http://diydrones.com/profiles/blogs/tutorial-programming-your?id=705844%3ABlogPost%3A148030&page=3" rel="nofollow">http://diydrones.com/profiles/blogs/tutorial-programming-your?id=705844%3ABlogPost%3A148030&amp;page=3</a></p>
+<p>The pinout for the FTDI cable is:</p>
+<p><a href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/ftdi_pinout.png"><img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/ftdi_pinout.png" style="max-width:100%;"></a></p>
+<p>Interconnecting the FTDI cable to the GPS is easy:</p>
+<pre><span style="text-decoration:underline;">FTDI Color&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;GPS Pin</span>
+Black(GND)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;GND
+Yellow(RX)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;TX
+Orange(TX)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;RX
+Red(VCC)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;  VCC</pre>
+<p>I connected the FTDI cable to my laptop and it immediately recognized the GPS as COM11. I set my terminal emulator for 9600 baud and it came right up!</p>
+<p><a href="https://bigdanzblog.files.wordpress.com/2015/01/ubox-gps-fig1.png"><img class="alignnone size-large wp-image-1194" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/ubox-gps-fig1.png" alt="ubox-gps-fig1" width="640" height="498"></a></p>
+<p>There is a tiny green LED on the GPS board (at least the version I have). When it flashes green, it has locked onto the satellites.</p>
+<p>I went to the u-blox site to get their board evaluation software:</p>
+<p><a href="http://www.u-blox.com/en/evaluation-tools-a-software/u-center/u-center.html" rel="nofollow">http://www.u-blox.com/en/evaluation-tools-a-software/u-center/u-center.html</a></p>
+<p>Came up fine and even told me exactly which room I was testing it in:</p>
+<p><a href="https://bigdanzblog.files.wordpress.com/2015/01/ubox-gps-fig22.png"><img class="alignnone size-large wp-image-1198" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/ubox-gps-fig22.png" alt="ubox-gps-fig2" width="640" height="335"></a></p>
+<p><strong>Connecting the GPS to an Arudino</strong></p>
+<p>It seems there is a library for EVERYTHING these days and that certainly is true for the GPS module. I downloaded the TinyGPSPlus library from here:</p>
+<p><a href="http://arduiniana.org/libraries/tinygpsplus/" rel="nofollow">http://arduiniana.org/libraries/tinygpsplus/</a></p>
+<p>I followed their instructions to install the library into the Arduino IDE. I then compiled and ran BasicExample from the GPS examples. This code doesn’t actually interface with the GPS. Instead, it really just let’s you know the GPS software library is working OK. No issues were found with this.</p>
+<p>Next, I opened the kitcheSink example. This example wants to connect to the GPS with pin 3 of the arduino connected to the RX pin of the GPS and pin 4 of the Arduino connected to the TX pin of the GPS. You HAVE to verify the baud rate for the GPS. The software is setup to use 4800 and, at least for me, the default is 9600.</p>
+<p>Once that was done, the software came up w/o a single hitch and started displaying GPS information:</p>
+<p><a href="https://bigdanzblog.files.wordpress.com/2015/01/ublox-fig31.png"><img class="alignnone size-large wp-image-1203" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/ublox-fig31.png" alt="ublox-fig3" width="640" height="139"></a></p>
+<p>I perused the TinyGPSPlus library and using it is very straight forward.</p>
+<p>Connecting a GPS to your Arduino and extracting location, date, time, speed, etc. is very simple!</p>
+<p>&nbsp;</p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-press-this"><a rel="nofollow" data-shared="" class="share-press-this sd-button share-icon" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/?share=press-this&nb=1" target="_blank" title="Click to Press This!"><span>Press This</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-1191" class="share-twitter sd-button share-icon" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/?share=twitter&nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-1191" class="share-facebook sd-button share-icon" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/?share=facebook&nb=1" target="_blank" title="Share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-1191" class="share-google-plus-1 sd-button share-icon" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/?share=google-plus-1&nb=1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-56566866-1191-56bbb94d2154e" data-src="//widgets.wp.com/likes/#blog_id=56566866&amp;post_id=1191&amp;origin=bigdanzblog.wordpress.com&amp;obj_id=56566866-1191-56bbb94d2154e" data-name="like-post-frame-56566866-1191-56bbb94d2154e"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-56566866-1191-56bbb94d2154e" height="55px" width="100%" frameborder="0" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/saved_resource(6).html"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="1207" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://bigdanzblog.wordpress.com/2015/01/18/connecting-u-blox-neo-6m-gps-to-raspberry-pi/" title="Connecting u-blox NEO-6M GPS to Raspberry Pi
+
+Previously, I connected a u-blox GPS to an arduino and got it functioning. Today I connected it to my Raspberry Pi, got the GPS daemon running, figured out how to get GPS information from the command line, and finally made the GPS an NTP clock source for the RPI. Connecting…" rel="nofollow" data-origin="1191" data-position="0">Connecting u-blox NEO-6M GPS to Raspberry Pi</a></span><span class="jp-relatedposts-post-context">In "c-rpi"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="1418" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://bigdanzblog.wordpress.com/2015/03/18/arduino-gps-and-sms-where-are-you-arny-the-arduino/" title="Arduino, GPS, and SMS: Texting GPS Coordinates
+
+I started playing around with this GPRS shield that I recently purchased from Amazon for a mere $30: http://ecx.images-amazon.com/images/I/81XtgbjdlmL._SL1500_.jpg The MFG&#39;s website is here http://www.geeetech.com/gprsgsm-sim900-shield-board-arduino-compatible-p-610.html and the WIKI for the device is here: http://www.geeetech.com/wiki/index.php/Arduino_GPRS_Shield Some other good reference sites I found are: http://www.cooking-hacks.com/documentation/tutorials/arduino-gprs-gsm-quadband-sim900 http://tronixstuff.com/2014/01/08/tutorial-arduino-and-sim900-gsm-modules/ After I received it, I ordered…" rel="nofollow" data-origin="1191" data-position="1">Arduino, GPS, and SMS: Texting GPS Coordinates</a></span><span class="jp-relatedposts-post-context">In "c-arduino"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="1404" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://bigdanzblog.wordpress.com/2015/03/11/high-checksum-errors-with-u-blox-neo-6m-gps-and-arduino/" title="High Checksum Errors with u-blox NEO-6M GPS and Arduino
+
+I&#39;m trying to implement some of my own code to read my GPS and I noticed the checksums were really high. I looked back at my initial test of the GPS and found I was getting high errors then too. Upon further research I found that the SoftwareSerial port is…" rel="nofollow" data-origin="1191" data-position="2">High Checksum Errors with u-blox NEO-6M GPS and Arduino</a></span><span class="jp-relatedposts-post-context">In "c-arduino"</span></p></div></div></div>											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+												This entry was posted in <a href="https://bigdanzblog.wordpress.com/category/c-head/c-arduino/" rel="category tag">c-arduino</a> and tagged <a href="https://bigdanzblog.wordpress.com/tag/gps/" rel="tag">gps</a>, <a href="https://bigdanzblog.wordpress.com/tag/gps-arduino/" rel="tag">gps arduino</a>. Bookmark the <a href="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man.html" title="Permalink to Connecting u-blox NEO-6M GPS to Arduino" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="https://bigdanzblog.wordpress.com/2015/01/13/cpldfpga-programming-for-an-arduino-kind-of-guy/" rel="prev"><span class="meta-nav">←</span> CPLD/FPGA Programming for an Arduino Kind of&nbsp;Guy</a></div>
+					<div class="nav-next"><a href="https://bigdanzblog.wordpress.com/2015/01/18/connecting-u-blox-neo-6m-gps-to-raspberry-pi/" rel="next">Connecting u-blox NEO-6M GPS to Raspberry&nbsp;Pi <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">10 Responses to <em>Connecting u-blox NEO-6M GPS to&nbsp;Arduino</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-409">
+		<div id="comment-409">
+			<div class="comment-author vcard">
+				<img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/753ba466c2de0ef72d4127fe58d095d4" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-753ba466c2de0ef72d4127fe58d095d4-0">				<cite class="fn">Rocker</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-409">
+				February 26, 2015 at 9:04 am</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>Software serial is too slow, are there alternatives?</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/?replytocom=409#respond" onclick="return addComment.moveForm( &quot;comment-409&quot;, &quot;409&quot;, &quot;respond&quot;, &quot;1191&quot; )" aria-label="Reply to Rocker">Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-dantheman60 comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-410">
+		<div id="comment-410">
+			<div class="comment-author vcard">
+				<img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/f614fa9fcd0cf7f363ca99f4dc85525b" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-f614fa9fcd0cf7f363ca99f4dc85525b-0">				<cite class="fn"><a href="https://bigdanzblog.wordpress.com/" rel="external nofollow" class="url">Dan TheMan</a></cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-410">
+				February 26, 2015 at 9:34 am</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>With a normal arduino Uno, the only other choice I know is to use the UART pins of 0 and 1, but then you can’t use normal USB debugging (e.g. Serial.print). </p>
+<p>With an Arduino Mega, you could use pins 14,15; 16,17; or 18,19. They are supported by hardware and should go faster.</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/?replytocom=410#respond" onclick="return addComment.moveForm( &quot;comment-410&quot;, &quot;410&quot;, &quot;respond&quot;, &quot;1191&quot; )" aria-label="Reply to Dan TheMan">Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="post pingback">
+		<p>Pingback: <a href="https://bigdanzblog.wordpress.com/2015/03/18/arduino-gps-and-sms-where-are-you-arny-the-arduino/" rel="external nofollow" class="url">Arduino, GPS, and SMS: Where Are You Arny the Arduino? | Big Dan the Blogging Man</a></p>
+	</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-483">
+		<div id="comment-483">
+			<div class="comment-author vcard">
+				<img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/4395188bc03312443049e8c43d31416d" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-4395188bc03312443049e8c43d31416d-0">				<cite class="fn">pohyee</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-483">
+				May 13, 2015 at 12:34 am</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>Hi, May i know that i must use FTDI cable? if i didnt use, it cant work?</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/?replytocom=483#respond" onclick="return addComment.moveForm( &quot;comment-483&quot;, &quot;483&quot;, &quot;respond&quot;, &quot;1191&quot; )" aria-label="Reply to pohyee">Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-dantheman60 comment-author-is-site-member bypostauthor odd alt depth-2 highlander-comment" id="li-comment-484">
+		<div id="comment-484">
+			<div class="comment-author vcard">
+				<img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/f614fa9fcd0cf7f363ca99f4dc85525b" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-f614fa9fcd0cf7f363ca99f4dc85525b-1">				<cite class="fn"><a href="https://bigdanzblog.wordpress.com/" rel="external nofollow" class="url">Dan TheMan</a></cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-484">
+				May 13, 2015 at 6:57 am</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>You only need the FTDI cable to connect the GPS to your PC!</p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/?replytocom=484#respond" onclick="return addComment.moveForm( &quot;comment-484&quot;, &quot;484&quot;, &quot;respond&quot;, &quot;1191&quot; )" aria-label="Reply to Dan TheMan">Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment even depth-3 highlander-comment" id="li-comment-485">
+		<div id="comment-485">
+			<div class="comment-author vcard">
+				<img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/4395188bc03312443049e8c43d31416d" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-4395188bc03312443049e8c43d31416d-1">				<cite class="fn">pohyee</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-485">
+				May 13, 2015 at 7:57 pm</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>yup, i have try it with FTDI..it is work….but where should i put my arduino?</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt depth-3 highlander-comment" id="li-comment-486">
+		<div id="comment-486">
+			<div class="comment-author vcard">
+				<img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/4395188bc03312443049e8c43d31416d" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-4395188bc03312443049e8c43d31416d-2">				<cite class="fn">pohyee</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-486">
+				May 13, 2015 at 8:02 pm</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>after i have connect my gps with arduino…it does not display anything…</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment byuser comment-author-dantheman60 comment-author-is-site-member bypostauthor even depth-2 highlander-comment" id="li-comment-487">
+		<div id="comment-487">
+			<div class="comment-author vcard">
+				<img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/f614fa9fcd0cf7f363ca99f4dc85525b" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-f614fa9fcd0cf7f363ca99f4dc85525b-2">				<cite class="fn"><a href="https://bigdanzblog.wordpress.com/" rel="external nofollow" class="url">Dan TheMan</a></cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-487">
+				May 13, 2015 at 9:32 pm</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>You are going to need to setup software serial properly. I suggest looking at example in the site I referenced: <a href="http://arduiniana.org/libraries/tinygpsplus/" rel="nofollow">http://arduiniana.org/libraries/tinygpsplus/</a></p>
+</div>
+
+			<div class="reply">
+				<a rel="nofollow" class="comment-reply-link" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/?replytocom=487#respond" onclick="return addComment.moveForm( &quot;comment-487&quot;, &quot;487&quot;, &quot;respond&quot;, &quot;1191&quot; )" aria-label="Reply to Dan TheMan">Reply</a>			</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment odd alt depth-3 highlander-comment" id="li-comment-488">
+		<div id="comment-488">
+			<div class="comment-author vcard">
+				<img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/4395188bc03312443049e8c43d31416d" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-4395188bc03312443049e8c43d31416d-3">				<cite class="fn">pohyee</cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-488">
+				May 13, 2015 at 10:36 pm</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>ya..i have set the serial…..rx lex in arduino do not have any response, it does not give data location…</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment byuser comment-author-dantheman60 comment-author-is-site-member bypostauthor even depth-3 highlander-comment" id="li-comment-489">
+		<div id="comment-489">
+			<div class="comment-author vcard">
+				<img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/f614fa9fcd0cf7f363ca99f4dc85525b" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40" id="grav-f614fa9fcd0cf7f363ca99f4dc85525b-3">				<cite class="fn"><a href="https://bigdanzblog.wordpress.com/" rel="external nofollow" class="url">Dan TheMan</a></cite> <span class="says">says:</span>			</div><!-- .comment-author .vcard -->
+			
+			<div class="comment-meta commentmetadata"><a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-489">
+				May 14, 2015 at 6:08 am</a>			</div><!-- .comment-meta .commentmetadata -->
+
+			<div class="comment-body"><p>My only other suggestion is to make sure the baud rate is correct. If I recall, mine ran at 9600, but from what I recall there is no guarantee that is how it will be set. You may need to use the FTDI cable, connect to a PC, and then determine the baud rate.</p>
+</div>
+
+			<div class="reply">
+							</div><!-- .reply -->
+		</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+			</ol>
+
+
+	
+
+				<div id="respond" class="comment-respond js">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#respond" style="display:none;">Cancel reply</a></small></h3>				<form action="https://bigdanzblog.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="1770bb7d05"><input type="hidden" name="_wp_http_referer" value="/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="wordpress">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: 24px; width: 618px;" class="autosizejs "></textarea><textarea id="comment" name="comment" title="Enter your comment here..." placeholder="Enter your comment here..." style="height: 44px; overflow: hidden; word-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+
+	<div id="comment-form-nascar" style="display: none;">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li style="display:none;">
+				<a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li class="selected">
+				<a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/saved_resource.html" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service" style="">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/ad516503a11cd5ca435acc9bb6523536" alt="Gravatar" width="25" class="no-grav">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value=""></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text" value=""></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/348d3d90236a9a8d7710b11fe2013ced" alt="Gravatar" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="https://0.gravatar.com/avatar/348d3d90236a9a8d7710b11fe2013ced?s=25&amp;d=https%3A%2F%2Fs2.wp.com%2Fwp-content%2Fmu-plugins%2Fhighlander-comments%2Fimages%2Fwplogo.png&amp;r=G">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="66401487">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="8b92b03c4ac94cd3d892cc76a93089119b97d2f8">
+				<p class="comment-form-posting-as pa-wordpress"><strong>IsaacSesi:</strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/ad516503a11cd5ca435acc9bb6523536" alt="Twitter picture" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/ad516503a11cd5ca435acc9bb6523536" alt="Facebook photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/ad516503a11cd5ca435acc9bb6523536" alt="Google+ photo" width="25" class="no-grav">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="1191" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="5bbf1a548d"></p>
+<input type="hidden" name="genseq" value="1455143245">
+<p style="display: none;"></p>				<input type="hidden" id="ak_js" name="ak_js" value="1455143452397"></form>
+					</div><!-- #respond -->
+		<div style="clear: both"></div>
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+						<ul class="xoxo">
+
+<li id="search-2" class="widget-container widget_search"><form role="search" method="get" id="searchform" class="searchform" action="https://bigdanzblog.wordpress.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s">
+					<input type="submit" id="searchsubmit" value="Search">
+				</div>
+			</form></li><li id="text-2" class="widget-container widget_text"><h3 class="widget-title">Translate(BETA)</h3>			<div class="textwidget"><a href="https://translate.google.com/translate?sl=auto&tl=de&js=y&prev=_t&hl=en&ie=UTF-8&u=bigdanzblog.wordpress.com&edit-text="><img src="http://free-website-translation.com/img/fwt_button_en.gif" id="ftwtranslation_image" alt="Free Website Translator" style="border:0;">
+</a></div>
+		</li>		<li id="recent-posts-2" class="widget-container widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-further-tcp-exploration/">ESP8266/Arduino IDE: Further TCP&nbsp;Exploration</a>
+						</li>
+					<li>
+				<a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-communicating-with-tcp/">ESP8266/Arduino IDE: Communicating with&nbsp;TCP</a>
+						</li>
+					<li>
+				<a href="https://bigdanzblog.wordpress.com/2016/02/07/esp8266arduino-ide-connecting-to-a-network-with-wifi/">ESP8266/Arduino IDE: Connecting to a Network with&nbsp;WIFI</a>
+						</li>
+					<li>
+				<a href="https://bigdanzblog.wordpress.com/2016/02/07/esp8266-and-using-the-arduino-ide/">ESP8266 and Using the Arduino&nbsp;IDE</a>
+						</li>
+					<li>
+				<a href="https://bigdanzblog.wordpress.com/2016/01/15/5v-to-48v-switch-mode-power-supply-using-mc34063/">5V to 48V Switch-Mode Power Supply using&nbsp;MC34063</a>
+						</li>
+				</ul>
+		</li>		<li id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3>				<table class="recentcommentsavatar" cellspacing="0" cellpadding="0" border="0">
+					<tbody><tr><td title="ESP8266/Arduino IDE: Further TCP Exploration | Big Dan the Blogging Man" class="recentcommentsavatartop" style="height:48px; width:48px;"><a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-further-tcp-exploration/" rel="nofollow"></a></td><td class="recentcommentstexttop" style=""><a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-further-tcp-exploration/" rel="nofollow">ESP8266/Arduino IDE:…</a> on <a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-communicating-with-tcp/comment-page-1/#comment-1138">ESP8266/Arduino IDE: Communica…</a></td></tr><tr><td title="ESP8266/Arduino IDE: Further TCP Exploration | Big Dan the Blogging Man" class="recentcommentsavatarend" style="height:48px; width:48px;"><a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-further-tcp-exploration/" rel="nofollow"></a></td><td class="recentcommentstextend" style=""><a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-further-tcp-exploration/" rel="nofollow">ESP8266/Arduino IDE:…</a> on <a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-communicating-with-tcp/comment-page-1/#comment-1137">ESP8266/Arduino IDE: Communica…</a></td></tr><tr><td title="Dan TheMan" class="recentcommentsavatarend" style="height:48px; width:48px;"><a href="https://bigdanzblog.wordpress.com/" rel="nofollow"><img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/f614fa9fcd0cf7f363ca99f4dc85525b(1)" class="avatar avatar-48 grav-hashed" height="48" width="48" id="grav-f614fa9fcd0cf7f363ca99f4dc85525b-4"></a></td><td class="recentcommentstextend" style=""><a href="https://bigdanzblog.wordpress.com/" rel="nofollow">Dan TheMan</a> on <a href="https://bigdanzblog.wordpress.com/2016/02/07/esp8266-and-using-the-arduino-ide/comment-page-1/#comment-1136">ESP8266 and Using the Arduino…</a></td></tr><tr><td title="Ambro" class="recentcommentsavatarend" style="height:48px; width:48px;"><a href="http://none/" rel="nofollow"><img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/cb0006e7c2eee5cb0ad1b14c7c1b90dd" class="avatar avatar-48 grav-hashed" height="48" width="48" id="grav-cb0006e7c2eee5cb0ad1b14c7c1b90dd-0"></a></td><td class="recentcommentstextend" style=""><a href="http://none/" rel="nofollow">Ambro</a> on <a href="https://bigdanzblog.wordpress.com/2016/02/07/esp8266-and-using-the-arduino-ide/comment-page-1/#comment-1135">ESP8266 and Using the Arduino…</a></td></tr><tr><td title="ESP8266/Arduino IDE: Communicating with TCP | Big Dan the Blogging Man" class="recentcommentsavatarend" style="height:48px; width:48px;"><a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-communicating-with-tcp/" rel="nofollow"></a></td><td class="recentcommentstextend" style=""><a href="https://bigdanzblog.wordpress.com/2016/02/09/esp8266arduino-ide-communicating-with-tcp/" rel="nofollow">ESP8266/Arduino IDE:…</a> on <a href="https://bigdanzblog.wordpress.com/2016/02/07/esp8266-and-using-the-arduino-ide/comment-page-1/#comment-1134">ESP8266 and Using the Arduino…</a></td></tr>				</tbody></table>
+				</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="footer-widget-area" role="complementary">
+
+				<div id="first" class="widget-area">
+					<ul class="xoxo">
+						<li id="blog_subscription-2" class="widget-container widget_blog_subscription"><h3 class="widget-title"><label for="subscribe-field">Follow Blog via Email</label></h3>
+				<form action="https://subscribe.wordpress.com/" method="post" accept-charset="utf-8" id="subscribe-blog">
+											<p>Click to follow this blog and receive notifications of new posts by email.</p>
+					
+					<p>
+						<input type="hidden" name="action" value="subscribe">
+						<input type="hidden" name="blog_id" value="56566866">
+						<input type="hidden" name="source" value="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/">
+						<input type="hidden" name="sub-type" value="widget">
+						<input type="hidden" name="redirect_fragment" value="blog_subscription-2">
+						<input type="hidden" id="_wpnonce" name="_wpnonce" value="8a76085d6e">						<input type="submit" value="Follow">
+					</p>
+				</form>
+			
+</li>					</ul>
+				</div><!-- #first .widget-area -->
+
+
+
+
+			</div><!-- #footer-widget-area -->
+
+			<div id="site-info">
+				<a href="https://bigdanzblog.wordpress.com/" title="Big Dan the Blogging Man" rel="home">
+					Big Dan the Blogging Man				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+				<a href="https://wordpress.com/themes/twentyten/" title="Learn more about this theme">The Twenty Ten Theme</a>.				<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<!-- wpcom_wp_footer -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+		jQuery(document).ready( function($) {
+			function doFollowingHover() {
+				$('#wp-admin-bar-follow > a').unbind( '.unfollow' );
+
+				$('#wp-admin-bar-follow > a').bind( 'mouseover.unfollow', function() {
+
+					$(this).html( "Unfollow" ).parent( 'li' ).addClass( 'unfollow' );
+				});
+				$('#wp-admin-bar-follow > a').bind( 'mouseout.unfollow', function() {
+					$(this).html( "Following" ).parent( 'li' ).removeClass( 'unfollow' );
+				});
+			}
+			
+			$('#wp-admin-bar-follow > a').click( function( e ) {
+				$('#wp-admin-bar-follow > a').unbind( '.unfollow' );
+
+				e.preventDefault();
+
+				var link = $( this ), li = $( '#wp-admin-bar-follow' ), timeout = 0;
+
+				if ( li.hasClass( 'subscribed' ) ) {
+					li.removeClass( 'subscribed' ).removeClass( 'unfollow' );
+					link.html( "Follow" );
+
+					$('body').append( $( 'div.wpcom-bubble' ).removeClass( 'fadein' ) ).off( 'click.bubble' );
+
+					var action = 'ab_unsubscribe_from_blog';
+				} else {
+					li.addClass( 'subscribed' ).removeClass( 'unfollow' );
+					link.html( "Following" );
+
+						var left = 131 - link.width();
+						li.append( $( 'div.wpcom-bubble' ).css( { left: '-' + left + 'px' } ) );
+						$( 'div.bubble-txt', 'div.wpcom-bubble' ).html( "New posts from this blog will now appear in <a target=\"_blank\" href=\"http:\/\/wordpress.com\/\">your reader<\/a>. You can manage email alerts from your <a target=\"_blank\" href=\"http:\/\/wordpress.com\/following\/edit\/\">subscriptions page<\/a>." );
+
+						$( 'div.wpcom-bubble.action-bubble' ).addClass( 'fadein' );
+
+						setTimeout( function() {
+							$('body').on( 'click.bubble touchstart.bubble', function(e) {
+								if ( !$(e.target).hasClass('wpcom-bubble') && !$(e.target).parents( 'div.wpcom-bubble' ).length )
+									hideBubble();
+							});
+							setTimeout( hideBubble, 15000 );
+						}, 500 );
+
+					var action = 'ab_subscribe_to_blog';
+					$('#wp-admin-bar-follow > a').bind( 'mouseout.shift', function() {
+						doFollowingHover();
+						$(this).unbind( '.shift' );
+					});
+				}
+
+				var nonce = link.attr( 'href' ).split( '_wpnonce=' );
+				nonce = nonce[1];
+
+				$.post( "https:\/\/bigdanzblog.wordpress.com\/wp-admin\/admin-ajax.php", {
+					'action': action,
+					'_wpnonce': nonce,
+					'source': 'admin_bar',
+					'blog_id': 56566866				});
+			});
+		});
+	/* ]]> */
+	</script>
+<script type="text/javascript" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":"348d3d90236a9a8d7710b11fe2013ced"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-753ba466c2de0ef72d4127fe58d095d4">
+	</div>
+	<div class="grofile-hash-map-f614fa9fcd0cf7f363ca99f4dc85525b">
+	</div>
+	<div class="grofile-hash-map-4395188bc03312443049e8c43d31416d">
+	</div>
+	<div class="grofile-hash-map-cb0006e7c2eee5cb0ad1b14c7c1b90dd">
+	</div>
+	</div>
+
+	<div id="ab-reblog-box">
+		<form action="" name="reblog">
+			<textarea id="reblog-content" name="reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="blogid" id="lblogid">Post to</label>
+
+			<select name="to_blog_id" id="reblog-to-blog-id">
+														<option value="69383623">Isaac Sesi</option>
+														<option value="72073430">TELPSAM</option>
+														<option value="69425601">tlpciknust</option>
+							</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="" class="cancel">Cancel</a></span>
+				<input type="submit" name="reblog-submit" class="button-primary" id="reblog-submit" value="Reblog Post">
+				<input type="hidden" id="original-blog-id" value="56566866">
+				<input type="hidden" id="original-post-id" value="1191">
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="7a32d5e1db"><input type="hidden" name="_wp_http_referer" value="/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/">		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+	var wpcom_reblog = {
+		request: false,
+		source: 'toolbar',
+
+		init: function() {
+			// Click reblog button on post
+			jQuery(document).on( 'click', '#wpadminbar .reblog', function(e) {
+				e.preventDefault();
+				wpcom_reblog.source = 'toolbar';
+
+				if ( jQuery( '#wpadminbar #ab-reblog-box' ).is( ':visible' ) ) {
+					wpcom_reblog.cancel_reblog();
+				}
+				else {
+					wpcom_reblog.show_reblog_box();
+				}
+			} );
+
+			// Clicked reblog button on already reblogged post.
+			jQuery(document).on( 'click', '#wpadminbar .reblogged', function(e) {
+				e.preventDefault();
+			});
+
+			// Click cancel reblog button
+			jQuery(document).on( 'click', '#ab-reblog-box a.cancel', function(e) {
+				e.preventDefault();
+				wpcom_reblog.cancel_reblog();
+			});
+
+			// Submit reblog box
+			jQuery(document).on( 'click', '#ab-reblog-box input[type=submit]', function(e) {
+				e.preventDefault();
+				wpcom_reblog.submit_reblog( jQuery(this) );
+			});
+		},
+
+		show_reblog_box: function() {
+			return this.show_reblog_box_here(
+				'#wp-admin-bar-wpr-reblog',
+				'#wpadminbar'
+			);
+		},
+
+		toggle_reblog_box_flair: function( obj_id ) {
+			if ( jQuery( '#jp-post-flair #ab-reblog-box' ).is( ':visible' ) ) {
+				wpcom_reblog.cancel_reblog();
+			}
+			else {
+				wpcom_reblog.show_reblog_box_flair( obj_id );
+			}
+		},
+
+		show_reblog_box_flair: function( obj_id ) {
+			this.source = 'post_flair';
+			this.obj_id = obj_id;
+			return this.show_reblog_box_here(
+				'.post-likes-widget',
+				'body'
+			);
+		},
+
+		show_reblog_box_here: function(anchorId, parentId) {
+			var jq = jQuery,
+			    $anchor = jq( anchorId ),
+			    $parent = jq( parentId ),
+			    $window = jq( window ),
+			    $scroll = jq('html, body'),
+			    $reblog_box = jq( '#ab-reblog-box' ),
+			    offset = $anchor.offset(),
+			    left = offset.left + 'px',
+			    width = '500px',
+			    position,
+			    top;
+
+			if ( $parent.css( 'position' ) === 'fixed' ) {
+				position = 'fixed';
+				top = $parent.position().top + $parent.outerHeight();
+			}
+			else {
+				position = 'absolute';
+				top = offset.top + $anchor.outerHeight() + 'px';
+			}
+			$reblog_box.remove();
+			$parent.append( $reblog_box );
+			$anchor.addClass( 'selected' );
+
+			if ( jq( window ).innerWidth() < offset.left + 500 ) {
+				// Most likely mobile or tablet
+				left = '0px';
+				width = ( jq( window ).innerWidth() - 24 ) + 'px';
+			}
+
+			$reblog_box
+				.find('p.response').remove().end()
+				.find('div.submit, div.submit span.canceltext').show().end()
+				.find('div.submit input[type=submit]').prop('disabled',false).end()
+				.show()
+				.css({
+					top : top,
+					left : left,
+					width : width,
+					position: position,
+					'z-index': 10 // slide under twentyfourteen's fixed-positioned masthead
+				});
+
+			// Ensure we can see the whole reblog box
+			var docViewTop = $window.scrollTop(),
+			    windowHeight = $window.height(),
+			    docViewBottom = docViewTop + windowHeight,
+			    elemTop = $reblog_box.offset().top,
+			    elemHeight = $reblog_box.outerHeight() + 10,
+			    elemBottom = elemTop + elemHeight;
+			if ( docViewTop > elemTop ) {
+				// Need to scroll up
+				// leave 75px for toolbar + Reblog button + margin
+				$scroll.animate({scrollTop: elemTop - 75});
+			}
+			else if ( docViewBottom < elemBottom ) {
+				// Need to scroll down
+				$scroll.animate({scrollTop: elemBottom - windowHeight}, 100);
+			}
+		},
+
+		submit_reblog: function( input ) {
+			var jq = jQuery;
+			var self = this;
+			if ( typeof this.request == 'object' )
+				this.request.abort();
+
+			input.attr( 'value', 'Reblogging...' );
+			input.prop( 'disabled', true );
+
+			jq( '#ab-reblog-box div.submit span.canceltext' ).fadeOut( 150, function() {
+				input.before( '<span class="spinner"></span>' );
+			});
+
+			var note = jq('#ab-reblog-box textarea').val();
+
+			if ( jq('#default-reblog-note').val() == note )
+				note = "";
+
+			this.request = jq.get( '/wp-admin/admin-ajax.php', {
+				'action': 'post_reblog',
+				'original_blog_id': jq('#original-blog-id').val(),
+				'original_post_id': jq('#original-post-id').val(),
+				'blog_id': jq('#ab-reblog-box select').val(),
+				'note': note,
+				'_wpnonce': jq('#ab-reblog-box #_wpnonce').val(),
+				'reblog_source': this.source
+			},
+			function(result, status, jqxhr) {
+				if ( ! ( "type" in result ) ) {
+					alert( "Error: " + jqxhr.responseText );
+				}
+				else if ( "error" == result.type ) {
+					alert( result.message );
+				}
+				else {
+					if ( typeof pm === 'function' ) {
+						console.log(self);
+						pm({
+							target : window.frames['likes-master'],
+							type : 'likesMessage',
+							data : { event: 'didReblog', obj_id: self.obj_id },
+							origin : '*'
+						});
+					}
+
+					jq( '#ab-reblog-box' ).hide();
+					jq( '#wp-admin-bar-wpr-reblog' ).addClass( 'reblogged' ).removeClass( 'reblog' ).find( 'a:first' ).text( 'Reblogged' );
+				}
+			}, 'json' );
+		},
+
+		cancel_reblog: function() {
+			jQuery( '#ab-reblog-box' ).hide();
+			jQuery( '#wp-admin-bar-wpr-reblog' ).removeClass( 'selected' );
+		}
+	};
+
+	wpcom_reblog.init();
+	</script>
+<div id="report-form-window" style="display:none;"></div><script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/bigdanzblog.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/bigdanzblog.wordpress.com\/wp-login.php?action=logout&_wpnonce=ee80367551","homeURL":"https:\/\/bigdanzblog.wordpress.com\/","postID":"1191","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"1","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/saved_resource(2)"></script>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/bigdanzblog.wordpress.com\/2015\/01\/15\/connecting-u-blox-neo-6m-gps-to-arduino\/":1191};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+				<iframe src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/master.html" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script type="text/javascript">
+		//<![CDATA[
+			var jetpackLikesWidgetQueue = [];
+			var jetpackLikesWidgetBatch = [];
+			var jetpackLikesMasterReady = false;
+
+			function JetpackLikespostMessage( message, target ) {
+				if ( "string" === typeof message ){
+					try{
+						message = JSON.parse( message );
+					}
+					catch(e) {
+						return;
+					}
+				}
+
+				pm( {
+					target: target,
+					type: 'likesMessage',
+					data: message,
+					origin: '*'
+				} );
+			}
+
+			function JetpackLikesBatchHandler() {
+				var requests = [];
+				jQuery( 'div.jetpack-likes-widget-unloaded' ).each( function( i ) {
+					if ( jetpackLikesWidgetBatch.indexOf( this.id ) > -1 )
+						return;
+					jetpackLikesWidgetBatch.push( this.id );
+					var regex = /like-(post|comment)-wrapper-(\d+)-(\d+)-(\w+)/;
+					var match = regex.exec( this.id );
+					if ( ! match || match.length != 5 )
+						return;
+
+					var info = {
+						blog_id: match[2],
+						width:   this.width
+					};
+
+					if ( 'post' == match[1] ) {
+						info.post_id = match[3];
+					} else if ( 'comment' == match[1] ) {
+						info.comment_id = match[3];
+					}
+
+					info.obj_id = match[4];
+
+					requests.push( info );
+				});
+
+				if ( requests.length > 0 ) {
+					JetpackLikespostMessage( { event: 'initialBatch', requests: requests }, window.frames['likes-master'] );
+				}
+			}
+
+			function JetpackLikesMessageListener( event ) {
+				if ( "undefined" == typeof event.event )
+					return;
+
+				if ( 'masterReady' == event.event ) {
+					jQuery( document ).ready( function() {
+						jetpackLikesMasterReady = true;
+
+						var stylesData = {
+								event: 'injectStyles'
+						};
+
+						if ( jQuery( 'iframe.admin-bar-likes-widget' ).length > 0 ) {
+							JetpackLikespostMessage( { event: 'adminBarEnabled' }, window.frames[ 'likes-master' ] );
+
+							stylesData.adminBarStyles = {
+								background: jQuery( '#wpadminbar .quicklinks li#wp-admin-bar-wpl-like > a' ).css( 'background' ),
+								isRtl: ( 'rtl' == jQuery( '#wpadminbar' ).css( 'direction' ) )
+							};
+						}
+
+						if ( !window.addEventListener )
+							jQuery( '#wp-admin-bar-admin-bar-likes-widget' ).hide();
+
+						stylesData.textStyles = {
+							color: jQuery( '.sd-text-color').css( 'color' ),
+							fontFamily: jQuery( '.sd-text-color' ).css( 'font-family' ),
+							fontSize: jQuery( '.sd-text-color' ).css( 'font-size' ),
+							direction: jQuery( '.sd-text-color' ).css( 'direction' ),
+							fontWeight: jQuery( '.sd-text-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-text-color' ).css( 'font-style' ),
+							textDecoration: jQuery( '.sd-text-color' ).css('text-decoration')
+						};
+
+						stylesData.linkStyles = {
+							color: jQuery( '.sd-link-color' ).css('color'),
+							fontFamily: jQuery( '.sd-link-color' ).css('font-family'),
+							fontSize: jQuery( '.sd-link-color' ).css('font-size'),
+							textDecoration: jQuery( '.sd-link-color' ).css('text-decoration'),
+							fontWeight: jQuery( '.sd-link-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-link-color' ).css( 'font-style' )
+						};
+
+						JetpackLikespostMessage( stylesData, window.frames[ 'likes-master' ] );
+
+						JetpackLikesBatchHandler();
+
+						jQuery( document ).on( 'inview', 'div.jetpack-likes-widget-unloaded', function() {
+							jetpackLikesWidgetQueue.push( this.id );
+						});
+					});
+				}
+
+				if ( 'showLikeWidget' == event.event ) {
+					jQuery( '#' + event.id + ' .post-likes-widget-placeholder'  ).fadeOut( 'fast', function() {
+						jQuery( '#' + event.id + ' .post-likes-widget' ).fadeIn( 'fast', function() {
+							JetpackLikespostMessage( { event: 'likeWidgetDisplayed', blog_id: event.blog_id, post_id: event.post_id, obj_id: event.obj_id }, window.frames['likes-master'] );
+						});
+					});
+				}
+
+				if ( 'clickReblogFlair' == event.event ) {
+					wpcom_reblog.toggle_reblog_box_flair( event.obj_id );
+				}
+
+				if ( 'showOtherGravatars' == event.event ) {
+					var $container = jQuery( '#likes-other-gravatars' );
+					var $list = $container.find( 'ul' );
+
+					$container.hide();
+					$list.html( '' );
+
+					$container.find( '.likes-text span' ).text( event.total );
+
+					jQuery.each( event.likers, function( i, liker ) {
+						$list.append( '<li class="' + liker.css_class + '"><a href="' + liker.profile_URL + '" class="wpl-liker" rel="nofollow" target="_parent"><img src="' + liker.avatar_URL + '" alt="' + liker.name + '" width="30" height="30" style="padding-right: 3px;" /></a></li>');
+					} );
+
+					var offset = jQuery( "[name='" + event.parent + "']" ).offset();
+
+					$container.css( 'left', offset.left + event.position.left - 10 + 'px' );
+					$container.css( 'top', offset.top + event.position.top - 33 + 'px' );
+
+					var rowLength = Math.floor( event.width / 37 );
+					var height = ( Math.ceil( event.likers.length / rowLength ) * 37 ) + 13;
+					if ( height > 204 ) {
+						height = 204;
+					}
+
+					$container.css( 'height', height + 'px' );
+					$container.css( 'width', rowLength * 37 - 7 + 'px' );
+
+					$list.css( 'width', rowLength * 37 + 'px' );
+
+					$container.fadeIn( 'slow' );
+
+					var scrollbarWidth = $list[0].offsetWidth - $list[0].clientWidth;
+					if ( scrollbarWidth > 0 ) {
+						$container.width( $container.width() + scrollbarWidth );
+						$list.width( $list.width() + scrollbarWidth );
+					}
+				}
+			}
+
+			pm.bind( 'likesMessage', function(e) { JetpackLikesMessageListener(e); } );
+
+			jQuery( document ).click( function( e ) {
+				var $container = jQuery( '#likes-other-gravatars' );
+
+				if ( $container.has( e.target ).length === 0 ) {
+					$container.fadeOut( 'slow' );
+				}
+			});
+
+			function JetpackLikesWidgetQueueHandler() {
+				var wrapperID;
+				if ( ! jetpackLikesMasterReady ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				if ( jetpackLikesWidgetQueue.length > 0 ) {
+					// We may have a widget that needs creating now
+					var found = false;
+					while( jetpackLikesWidgetQueue.length > 0 ) {
+						// Grab the first member of the queue that isn't already loading.
+						wrapperID = jetpackLikesWidgetQueue.splice( 0, 1 )[0];
+						if ( jQuery( '#' + wrapperID ).hasClass( 'jetpack-likes-widget-unloaded' ) ) {
+							found = true;
+							break;
+						}
+					}
+					if ( ! found ) {
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				} else if ( jQuery( 'div.jetpack-likes-widget-unloaded' ).length > 0 ) {
+					// Grab any unloaded widgets for a batch request
+					JetpackLikesBatchHandler();
+
+					// Get the next unloaded widget
+					wrapperID = jQuery( 'div.jetpack-likes-widget-unloaded' ).first()[0].id;
+					if ( ! wrapperID ) {
+						// Everything is currently loaded
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				}
+
+				if ( 'undefined' === typeof wrapperID ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				var $wrapper = jQuery( '#' + wrapperID );
+				$wrapper.find( 'iframe' ).remove();
+
+				if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='22px' width='68px' frameBorder='0' scrolling='no' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				} else {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='55px' width='100%' frameBorder='0' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				}
+
+				$wrapper.removeClass( 'jetpack-likes-widget-unloaded' ).addClass( 'jetpack-likes-widget-loading' );
+
+				$wrapper.find( 'iframe' ).load( function( e ) {
+					var $iframe = jQuery( e.target );
+					$wrapper.removeClass( 'jetpack-likes-widget-loading' ).addClass( 'jetpack-likes-widget-loaded' );
+
+					JetpackLikespostMessage( { event: 'loadLikeWidget', name: $iframe.attr( 'name' ), width: $iframe.width() }, window.frames[ 'likes-master' ] );
+
+					if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+						$wrapper.find( 'iframe' ).Jetpack( 'resizeable' );
+					}
+				});
+				setTimeout( JetpackLikesWidgetQueueHandler, 250 );
+			}
+			JetpackLikesWidgetQueueHandler();
+		//]]>
+		</script>
+<script type="text/javascript" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/form.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var thickboxL10n = {"next":"Next >","prev":"< Prev","image":"Image","of":"of","close":"Close","noiframes":"This feature requires inline frames. You have iframes disabled or your browser does not support them.","loadingAnimation":"https:\/\/s1.wp.com\/wp-includes\/js\/thickbox\/loadingAnimation.gif"};
+var thickboxL10n = {"next":"Next >","prev":"< Prev","image":"Image","of":"of","close":"Close","noiframes":"This feature requires inline frames. You have iframes disabled or your browser does not support them.","loadingAnimation":"https:\/\/s1.wp.com\/wp-includes\/js\/thickbox\/loadingAnimation.gif"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var JetpackEmojiSettings = {"base_url":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/emoji\/twemoji\/"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpNotesArgs = {"cacheBuster":"20150825","iframeUrl":"https:\/\/widgets.wp.com\/notifications\/","iframeAppend":"2","iframeScroll":"no","wide":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpcom_tos_report_form = {"ajaxurl":"\/wp-admin\/admin-ajax.php","isLoggedoutUser":"","post_ID":"1191","current_url":"https:\/\/bigdanzblog.wordpress.com\/2015\/01\/15\/connecting-u-blox-neo-6m-gps-to-arduino","report_this_content":"Report this content"};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"56566866","siteName":"Big Dan the Blogging Man","siteURL":"http:\/\/bigdanzblog.wordpress.com","icon":"<img alt='' src='https:\/\/s1.wp.com\/i\/void.gif' class='avatar avatar-36' height='36' width='36' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/twentyten","themeURL":"https:\/\/wordpress.com\/themes\/twentyten\/","xhrURL":"https:\/\/bigdanzblog.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"c33a5e45c7","isSingular":"1","isFolded":"","customizeLink":"https:\/\/bigdanzblog.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fbigdanzblog.wordpress.com%2F2015%2F01%2F15%2Fconnecting-u-blox-neo-6m-gps-to-arduino%2F","postID":"1191","shortlink":"http:\/\/wp.me\/p3PlCO-jd","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/bigdanzblog.wordpress.com\/1191","i18n":{"view":"View Site","follow":"Follow","following":"Following","edit":"Edit","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Twenty Ten","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage Sites I Follow"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/saved_resource(3)"></script><div id="actionbar" class="actnbr-pub-twentyten actnbr-has-follow actnbr-hidden"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href=""><svg class="gridicon gridicon__follow" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"></path><path d="M11 6h2v12.1h-2z"></path><path d="M6 11h11.83v2H6z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner"> 			    			New posts from this site will now appear in your <a href="https://wordpress.com/">Reader</a> 			    		</div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="http://bigdanzblog.wordpress.com/"><img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/void.gif" class="avatar avatar-36" height="36" width="36"> Big Dan the Blogging Man</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://bigdanzblog.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Fbigdanzblog.wordpress.com%2F2015%2F01%2F15%2Fconnecting-u-blox-neo-6m-gps-to-arduino%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href=""><svg class="gridicon gridicon__follow" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"></path><path d="M11 6h2v12.1h-2z"></path><path d="M6 11h11.83v2H6z"></path></g></svg><span>Follow</span></a></li> 				    <li class="actnbr-theme actnbr-hidden"><a href="https://wordpress.com/themes/twentyten/">Get theme: Twenty Ten</a></li> 				    <li class="actnbr-shortlink actnbr-hidden"><a href="http://wp.me/p3PlCO-jd">Copy shortlink</a></li> 				    <li class="flb-report actnbr-hidden"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				    <li class="actnbr-subs actnbr-hidden"><a href="https://wordpress.com/following/edit">Manage Sites I Follow</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script><script src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/w.js" type="text/javascript" async="" defer=""></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['identifyUser', 66401487, 'isaacsesi19']);
+_tkq.push(['storeContext', {'blog_id':'56566866','blog_tz':'-8','user_lang':'en','blog_lang':'en'}]);
+_stq.push(['view', {'blog':'56566866','v':'wpcom','tz':'-8','user_id':'66401487','post':'1191','subd':'bigdanzblog'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1zNDZ8S252Wis9XUQyb3YrcUVIU2R0VH5TdWI5d350TFdaeXR4OFRqPytqcHcxeT1JUVVCclRNUmxkUWhYX21NQTlVaWd0Ql1jS0J2aVQsd05vU1p8LWc0S1h8WCtYNzJvclV5STNkPXcvP3x4SjZBMXZiSlBYL0JyTVlySy1mR2FzXXFHTTVKXXR3R2RhdFdNQTl3cj96W3k4MGxJUEljUSVKajY/JUpkU2Q2JjdBdWhnNFgxeHZlK1NSeiUuZXhnRStvQS9aNENXbFVPSmZiejBHSWhiUXEuS3lNVS00WFBsXWx0ajdUZlQmLGUuLC5zc0ZsazY4Ny1qZ0hBZys2Z1VnPTZ0NG9ffFl3aHZLLjk9Tmg5K2dRQVNMMj0rXTU9bEZjOGwzY1tbRGwyT2FPUz9ULXx2M0RrYk96fiY='}]);
+_stq.push([ 'clickTrackerInit', '56566866', '1191' ]);
+	</script>
+<noscript>&lt;img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /&gt;</noscript>
+		<div id="wpadminbar" class="ltr">
+							<a class="screen-reader-shortcut" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#wp-toolbar" tabindex="1">Skip to toolbar</a>
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar" tabindex="0">
+						<ul id="wp-admin-bar-root-default" class="ab-top-menu">
+			
+		<li id="wp-admin-bar-blog" class="menupop my-sites"><a class="ab-item" aria-haspopup="true" href="https://wordpress.com/stats/bigdanzblog.wordpress.com">My Sites</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-blog-default" class="ab-submenu">
+			
+		<li id="wp-admin-bar-blog-info" class="all-my-sites">		<div class="ab-item ab-empty-item"><div class="ab-site-icon"></div><a href="https://wordpress.com/stats"><span class="ab-site-title">All My Sites</span><span class="ab-site-description">Manage all my sites</span></a></div>		</li>
+		<li id="wp-admin-bar-switch-site" class="menupop"><a class="ab-item" aria-haspopup="true" href="https://wordpress.com/sites">Switch Site</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-my-sites" class="ab-sub-secondary ab-submenu">
+			
+		<li id="wp-admin-bar-blog-69383623" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://isaacsesi.wordpress.com/"><img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/w-32.png" alt="Blavatar" width="16" height="16">Isaac Sesi</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-blog-69383623-default" class="ab-submenu">
+			
+		<li id="wp-admin-bar-blog-69383623-d"><a class="ab-item" href="https://isaacsesi.wordpress.com/wp-admin/">WP Admin</a>		</li>
+		<li id="wp-admin-bar-blog-69383623-n"><a class="ab-item" href="https://wordpress.com/post/isaacsesi.wordpress.com">New Post</a>		</li>
+		<li id="wp-admin-bar-blog-69383623-s"><a class="ab-item" href="https://wordpress.com/stats/isaacsesi.wordpress.com">Stats</a>		</li>
+		<li id="wp-admin-bar-blog-69383623-c"><a class="ab-item" href="https://isaacsesi.wordpress.com/wp-admin/edit-comments.php">Manage Comments</a>		</li>
+		<li id="wp-admin-bar-blog-69383623-v"><a class="ab-item" href="http://isaacsesi.wordpress.com/">Read Blog</a>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-blog-72246043" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://www.inventelectronics.com/"><img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/w-32.png" alt="Blavatar" width="16" height="16">Invent Electronics</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-blog-72246043-default" class="ab-submenu">
+			
+		<li id="wp-admin-bar-blog-72246043-d"><a class="ab-item" href="https://www.inventelectronics.com/wp-admin/">WP Admin</a>		</li>
+		<li id="wp-admin-bar-blog-72246043-n"><a class="ab-item" href="https://wordpress.com/post/www.inventelectronics.com">New Post</a>		</li>
+		<li id="wp-admin-bar-blog-72246043-s"><a class="ab-item" href="https://wordpress.com/stats/www.inventelectronics.com">Stats</a>		</li>
+		<li id="wp-admin-bar-blog-72246043-c"><a class="ab-item" href="https://www.inventelectronics.com/wp-admin/edit-comments.php">Manage Comments</a>		</li>
+		<li id="wp-admin-bar-blog-72246043-v"><a class="ab-item" href="http://www.inventelectronics.com/">Read Blog</a>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-blog-104466449" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://osrambacom.ipage.com/"><img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/w-32.png" alt="Blavatar" width="16" height="16">Osram-Ba</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-blog-104466449-default" class="ab-submenu">
+			
+		<li id="wp-admin-bar-blog-104466449-d"><a class="ab-item" href="https://osrambacom.ipage.com/wp-admin/">WP Admin</a>		</li>
+		<li id="wp-admin-bar-blog-104466449-n"><a class="ab-item" href="https://wordpress.com/post/osrambacom.ipage.com">New Post</a>		</li>
+		<li id="wp-admin-bar-blog-104466449-s"><a class="ab-item" href="https://wordpress.com/stats/osrambacom.ipage.com">Stats</a>		</li>
+		<li id="wp-admin-bar-blog-104466449-c"><a class="ab-item" href="https://osrambacom.ipage.com/wp-admin/edit-comments.php">Manage Comments</a>		</li>
+		<li id="wp-admin-bar-blog-104466449-v"><a class="ab-item" href="http://osrambacom.ipage.com/">Read Blog</a>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-blog-104338600" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://www.pascoapp.com/"><img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/w-32.png" alt="Blavatar" width="16" height="16">Pasco!</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-blog-104338600-default" class="ab-submenu">
+			
+		<li id="wp-admin-bar-blog-104338600-d"><a class="ab-item" href="https://www.pascoapp.com/wp-admin/">WP Admin</a>		</li>
+		<li id="wp-admin-bar-blog-104338600-n"><a class="ab-item" href="https://wordpress.com/post/www.pascoapp.com">New Post</a>		</li>
+		<li id="wp-admin-bar-blog-104338600-s"><a class="ab-item" href="https://wordpress.com/stats/www.pascoapp.com">Stats</a>		</li>
+		<li id="wp-admin-bar-blog-104338600-c"><a class="ab-item" href="https://www.pascoapp.com/wp-admin/edit-comments.php">Manage Comments</a>		</li>
+		<li id="wp-admin-bar-blog-104338600-v"><a class="ab-item" href="http://www.pascoapp.com/">Read Blog</a>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-blog-72073430" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://telpsam.wordpress.com/"><img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/w-32.png" alt="Blavatar" width="16" height="16">TELPSAM</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-blog-72073430-default" class="ab-submenu">
+			
+		<li id="wp-admin-bar-blog-72073430-d"><a class="ab-item" href="https://telpsam.wordpress.com/wp-admin/">WP Admin</a>		</li>
+		<li id="wp-admin-bar-blog-72073430-n"><a class="ab-item" href="https://wordpress.com/post/telpsam.wordpress.com">New Post</a>		</li>
+		<li id="wp-admin-bar-blog-72073430-s"><a class="ab-item" href="https://wordpress.com/stats/telpsam.wordpress.com">Stats</a>		</li>
+		<li id="wp-admin-bar-blog-72073430-c"><a class="ab-item" href="https://telpsam.wordpress.com/wp-admin/edit-comments.php">Manage Comments</a>		</li>
+		<li id="wp-admin-bar-blog-72073430-v"><a class="ab-item" href="http://telpsam.wordpress.com/">Read Blog</a>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-blog-69425601" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://tlpciknust.wordpress.com/"><img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/w-32.png" alt="Blavatar" width="16" height="16">tlpciknust</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-blog-69425601-default" class="ab-submenu">
+			
+		<li id="wp-admin-bar-blog-69425601-d"><a class="ab-item" href="https://tlpciknust.wordpress.com/wp-admin/">WP Admin</a>		</li>
+		<li id="wp-admin-bar-blog-69425601-n"><a class="ab-item" href="https://wordpress.com/post/tlpciknust.wordpress.com">New Post</a>		</li>
+		<li id="wp-admin-bar-blog-69425601-s"><a class="ab-item" href="https://wordpress.com/stats/tlpciknust.wordpress.com">Stats</a>		</li>
+		<li id="wp-admin-bar-blog-69425601-c"><a class="ab-item" href="https://tlpciknust.wordpress.com/wp-admin/edit-comments.php">Manage Comments</a>		</li>
+		<li id="wp-admin-bar-blog-69425601-v"><a class="ab-item" href="http://tlpciknust.wordpress.com/">Read Blog</a>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-blog-94082330" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://wiresandbytes.com/"><img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/w-32.png" alt="Blavatar" width="16" height="16">Wires &amp; Bytes</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-blog-94082330-default" class="ab-submenu">
+			
+		<li id="wp-admin-bar-blog-94082330-d"><a class="ab-item" href="https://wiresandbytes.com/wp-admin/">WP Admin</a>		</li>
+		<li id="wp-admin-bar-blog-94082330-n"><a class="ab-item" href="https://wordpress.com/post/wiresandbytes.com">New Post</a>		</li>
+		<li id="wp-admin-bar-blog-94082330-s"><a class="ab-item" href="https://wordpress.com/stats/wiresandbytes.com">Stats</a>		</li>
+		<li id="wp-admin-bar-blog-94082330-c"><a class="ab-item" href="https://wiresandbytes.com/wp-admin/edit-comments.php">Manage Comments</a>		</li>
+		<li id="wp-admin-bar-blog-94082330-v"><a class="ab-item" href="http://wiresandbytes.com/">Read Blog</a>		</li>		</ul>
+	</div>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-blog-stats" class="mb-icon"><a class="ab-item" href="https://wordpress.com/stats">Stats</a>		</li>		</ul>
+			<ul id="wp-admin-bar-blog-secondary" class="ab-sub-secondary ab-submenu">
+			
+		<li id="wp-admin-bar-wpcom_report_url"><a class="ab-item" href="https://en.wordpress.com/complaints/">Report this content</a>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-jumptotop-button-menu"><a class="ab-item" href="https://bigdanzblog.wordpress.com/2015/01/15/connecting-u-blox-neo-6m-gps-to-arduino/#"><div id="jumptotop" style="top: 0px;"><span class="noticon noticon-top"></span></div></a>		</li>
+		<li id="wp-admin-bar-newdash" class="menupop"><a class="ab-item" aria-haspopup="true" href="https://wordpress.com/">Reader</a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-newdash-default" class="ab-submenu">
+			
+		<li id="wp-admin-bar-streams-header" class="ab-submenu-header">		<div class="ab-item ab-empty-item">Streams</div>		</li>
+		<li id="wp-admin-bar-following" class="inline-action">		<div class="ab-item ab-empty-item"><a href="https://wordpress.com/" class="ab-item primary mb-icon" id="wp-admin-bar-followed-sites">Followed Sites</a><a href="https://wordpress.com/following/edit" class="secondary">Manage</a></div>		</li>
+		<li id="wp-admin-bar-discover-discover" class="mb-icon-spacer"><a class="ab-item" href="https://wordpress.com/discover">Discover</a>		</li>
+		<li id="wp-admin-bar-discover-recommended-blogs" class="mb-icon-spacer"><a class="ab-item" href="https://wordpress.com/recommendations">Recommendations</a>		</li>
+		<li id="wp-admin-bar-my-activity-my-likes" class="mb-icon-spacer"><a class="ab-item" href="https://wordpress.com/activities/likes">My Likes</a>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-admin-bar-likes-widget">		<div class="ab-item ab-empty-item"></div><iframe class="admin-bar-likes-widget jetpack-likes-widget" scrolling="no" frameborder="0" name="admin-bar-likes-widget" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/saved_resource(7).html"></iframe>		</li>		</ul>
+			<ul id="wp-admin-bar-top-secondary" class="ab-top-secondary ab-top-menu">
+			
+		<li id="wp-admin-bar-notes" class="menupop">		<div class="ab-item ab-empty-item"><span id="wpnt-notes-unread-count" class="wpnt-loading wpn-read"><span class="noticon noticon-notification"></span></span></div><div id="wpnt-notes-panel2" style="display:none" lang="en" dir="ltr" class="wide"><iframe style="" id="wpnt-notes-iframe2" frameborder="0" allowtransparency="true" scrolling="no" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/saved_resource(8).html" class="wide"></iframe></div>		</li>
+		<li id="wp-admin-bar-my-account" class="menupop with-avatar no-grav"><a class="ab-item" aria-haspopup="true" href="https://wordpress.com/me/"><img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/348d3d90236a9a8d7710b11fe2013ced(1)" class="avatar avatar-32" height="32" width="32"><span class="ab-text">Me</span></a>			<div class="ab-sub-wrapper">		<ul id="wp-admin-bar-user-actions" class="ab-submenu">
+			
+		<li id="wp-admin-bar-user-info" class="user-info user-info-item">		<div class="ab-item ab-empty-item" tabindex="-1"><img alt="" src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/348d3d90236a9a8d7710b11fe2013ced(2)" class="avatar avatar-128" height="128" width="128"><span class="display-name">IsaacSesi</span><span class="username"><a class="at-username" href="http://gravatar.com/isaacsesi19">isaacsesi19</a>&nbsp;·&nbsp;<a href="https://bigdanzblog.wordpress.com/wp-login.php?action=logout&redirect_to=https%3A%2F%2Fwordpress.com%2F&_wpnonce=ee80367551">Sign Out</a></span></div>		</li>
+		<li id="wp-admin-bar-profile-header" class="ab-submenu-header">		<div class="ab-item ab-empty-item">Profile</div>		</li>
+		<li id="wp-admin-bar-my-profile" class="mb-icon"><a class="ab-item" href="https://wordpress.com/me">My Profile</a>		</li>
+		<li id="wp-admin-bar-account-settings" class="mb-icon"><a class="ab-item" href="https://wordpress.com/me/account">Account Settings</a>		</li>
+		<li id="wp-admin-bar-billing" class="mb-icon"><a class="ab-item" href="https://wordpress.com/me/billing">Billing History</a>		</li>
+		<li id="wp-admin-bar-security" class="mb-icon"><a class="ab-item" href="https://wordpress.com/me/security">Security</a>		</li>
+		<li id="wp-admin-bar-notifications" class="mb-icon"><a class="ab-item" href="https://wordpress.com/me/notifications">Notifications</a>		</li>
+		<li id="wp-admin-bar-special-header" class="ab-submenu-header">		<div class="ab-item ab-empty-item">Special</div>		</li>
+		<li id="wp-admin-bar-get-apps" class="mb-icon"><a class="ab-item" href="https://wordpress.com/me/get-apps">Get Apps</a>		</li>
+		<li id="wp-admin-bar-next-steps" class="mb-icon"><a class="ab-item" href="https://wordpress.com/me/next">Next Steps</a>		</li>
+		<li id="wp-admin-bar-help" class="mb-icon"><a class="ab-item" href="https://en.support.wordpress.com/">Help</a>		</li>		</ul>
+	</div>		</li>
+		<li id="wp-admin-bar-ab-new-post"><a class="ab-item" href="https://wordpress.com/post"></a>		</li>		</ul>
+				</div>
+							<a class="screen-reader-shortcut" href="https://bigdanzblog.wordpress.com/wp-login.php?action=logout&_wpnonce=ee80367551">Log Out</a>
+					</div>
+
+	
+<script type="text/javascript">
+/* <![CDATA[ */
+var clickDebugLink;
+
+jQuery(document).ready( function($) {
+	var single = true, w = 1000,
+		supe = false;
+
+	$(document.body).load(function(){ $('#wpadminbar img.grav-hashed').removeClass('grav-hashed'); }); // hack to hide the gravatar hovercard
+
+	if ( single && supe )
+		w = 1385;
+	else if ( supe )
+		w = 1200;
+
+	// debug bar extra
+	clickDebugLink = function( parent_id, obj ) {
+
+		$('#'+parent_id).children('div').hide();
+
+		document.getElementById( obj.href.substr( obj.href.indexOf( '#' ) + 1 ) ).style.display = 'block';
+		$( obj.href.substr( obj.href.indexOf( '#' ) ) ).show()
+
+		$(obj).parent().addClass('current').siblings('li').removeClass('current');
+
+		return false;
+	};
+
+	$( '#wpadminbar #wp-admin-bar-shortlink' ).click( function() {
+		$( '#adminbar-shortlink-input' ).select();
+	});
+
+	// skip tap-to-hover on site switcher for mobile
+	if ( 'ontouchstart' in window ) {
+		$('#wp-admin-bar-switch-site').on( 'touchstart', function( event ) {
+			if ( $( window ).width() > 782 ) {
+				return;
+			}
+			event.stopPropagation();
+			$( event.target ).first( 'a' ).click();
+		});
+	}
+
+});
+/* ]]> */
+</script>
+	<div class="wpcom-bubble action-bubble">
+		<div class="bubble-txt"></div>
+	</div>
+	<script type="text/javascript">function hideBubble() { jQuery('body').append( jQuery( 'div.wpcom-bubble' ).removeClass( 'fadein' ) ).off( 'click.bubble touchstart.bubble' ); jQuery(document).off( 'scroll.bubble' ); };</script>
+		<script type="text/javascript">
+	jQuery( '#wp-admin-bar-jumptotop-button-menu a' ).click( function( e ) {
+		e.preventDefault();
+		jQuery( 'html, body' ).animate( { scrollTop: 0 }, 'fast' );
+	} );
+	function hideShowTbJumpToTop() {
+		var total_width = 0;
+		// Calculate total width taken by items minus our button to see if it'll
+		// overlap with other toolbar menus.
+		jQuery( '#wp-admin-bar-root-default > li' ).each( function() {
+			var self = jQuery( this );
+			if ( 'wp-admin-bar-jumptotop-button-menu' != self.attr( 'id' ) )
+				total_width += self.width();
+		});
+		if ( jQuery( '#wp-admin-bar-jumptotop-button-menu' ).position()['left'] - total_width < 10 ) {
+			jQuery( '#jumptotop' ).animate( { 'top': '-50px' }, 'fast' );
+		} else if (  jQuery( window ).scrollTop() >= 350 && parseInt( jQuery( '#jumptotop' ).css( 'top' ) ) < 0 ) {
+			if ( jQuery( '#wp-admin-bar-jumptotop-button-menu' ).position()['left'] - total_width < 10 )
+			   return;
+			jQuery( '#jumptotop' ).animate( { 'top': 0 }, 'fast' );
+		} else if (  jQuery( window ).scrollTop() < 1 && parseInt( jQuery( '#jumptotop' ).css( 'top' ) ) >= 0 ) {
+			jQuery( '#jumptotop' ).animate( { 'top': '-50px' }, 'fast' );
+		}
+	}
+	// handle on page load if auto scrolling to a position
+	hideShowTbJumpToTop();
+	// bind to scrolll event
+	var jumpToTopTimer = null;
+	jQuery( window ).scroll( function() {
+		clearTimeout( jumpToTopTimer );
+		jumpToTopTimer = setTimeout( jumpToTopRefresh, 150 );
+	} );
+	var jumpToTopRefresh = function() {
+		hideShowTbJumpToTop();
+	};
+	</script>
+	<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<img src="./Connecting u-blox NEO-6M GPS to Arduino _ Big Dan the Blogging Man_files/g.gif" id="wpstats"></body></html>

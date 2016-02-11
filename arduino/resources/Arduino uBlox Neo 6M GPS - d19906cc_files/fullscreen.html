@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!-- saved from url=(0092)http://pasted.co/d19906cc/fullscreen.php?hash=b0a889d03e4c4cf7d8659e64e83fdb21&linenum=false -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+   <link rel="stylesheet" href="global.css" type="text/css" media="screen">
+      <link rel="stylesheet" href="fullscreen.css" type="text/css" media="screen">
+
+   
+   <script type="text/javascript">
+   <!--
+      var root_url = "http://pasted.co/";
+   -->
+   </script>	
+
+   
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="tinypaste.js"></script> 
+   
+   
+   <!--[if lt IE 7]>
+   <script defer type="text/javascript" src="http://pasted.co/public/js/pngfix.js"></script>
+   <![endif]-->
+   
+</head> 
+<body>
+    
+    <div id="fullwrapper" class="tpPageFullview">
+       
+		
+		<meta name="robots" content="noindex, nofollow, noarchive, nocache">	
+			
+
+
+
+
+<pre id="thepaste" class="prettyprint">#include &lt;SoftwareSerial.h&gt;
+#include &lt;TinyGPS.h&gt;
+
+
+SoftwareSerial mySerial(10, 11); // RX, TX
+TinyGPS gps;
+
+void gpsdump(TinyGPS &amp;gps);
+void printFloat(double f, int digits = 2);
+
+void setup()  
+{
+  // Open serial communications and wait for port to open:
+  Serial.begin(9600);
+  
+  
+
+  // set the data rate for the SoftwareSerial port
+  mySerial.begin(9600);
+  
+  delay(1000);
+  Serial.println("uBlox Neo 6M");
+  Serial.print("Testing TinyGPS library v. "); Serial.println(TinyGPS::library_version());
+  Serial.println("by Mikal Hart");
+  Serial.println();
+  Serial.print("Sizeof(gpsobject) = "); Serial.println(sizeof(TinyGPS));
+  Serial.println();
+  
+}
+
+void loop() // run over and over
+{
+  bool newdata = false;
+  unsigned long start = millis();
+
+  // Every 5 seconds we print an update
+  while (millis() - start &lt; 5000) {
+    if (mySerial.available()) {
+      char c = mySerial.read();
+      // Serial.print(c);  // uncomment to see raw GPS data
+      if (gps.encode(c)) {
+        newdata = true;
+        // break;  // uncomment to print new data immediately!
+      }
+    }
+  }
+  
+  if (newdata) {
+    Serial.println("Acquired Data");
+    Serial.println("-------------");
+    gpsdump(gps);
+    Serial.println("-------------");
+    Serial.println();
+  }
+  
+}
+
+void gpsdump(TinyGPS &amp;gps)
+{
+  long lat, lon;
+  float flat, flon;
+  unsigned long age, date, time, chars;
+  int year;
+  byte month, day, hour, minute, second, hundredths;
+  unsigned short sentences, failed;
+
+  gps.get_position(&amp;lat, &amp;lon, &amp;age);
+  Serial.print("Lat/Long(10^-5 deg): "); Serial.print(lat); Serial.print(", "); Serial.print(lon); 
+  Serial.print(" Fix age: "); Serial.print(age); Serial.println("ms.");
+  
+  // On Arduino, GPS characters may be lost during lengthy Serial.print()
+  // On Teensy, Serial prints to USB, which has large output buffering and
+  //   runs very fast, so it's not necessary to worry about missing 4800
+  //   baud GPS characters.
+
+  gps.f_get_position(&amp;flat, &amp;flon, &amp;age);
+  Serial.print("Lat/Long(float): "); printFloat(flat, 5); Serial.print(", "); printFloat(flon, 5);
+  Serial.print(" Fix age: "); Serial.print(age); Serial.println("ms.");
+
+  gps.get_datetime(&amp;date, &amp;time, &amp;age);
+  Serial.print("Date(ddmmyy): "); Serial.print(date); Serial.print(" Time(hhmmsscc): ");
+    Serial.print(time);
+  Serial.print(" Fix age: "); Serial.print(age); Serial.println("ms.");
+
+  gps.crack_datetime(&amp;year, &amp;month, &amp;day, &amp;hour, &amp;minute, &amp;second, &amp;hundredths, &amp;age);
+  Serial.print("Date: "); Serial.print(static_cast&lt;int&gt;(month)); Serial.print("/"); 
+    Serial.print(static_cast&lt;int&gt;(day)); Serial.print("/"); Serial.print(year);
+  Serial.print("  Time: "); Serial.print(static_cast&lt;int&gt;(hour)); Serial.print(":"); 
+    Serial.print(static_cast&lt;int&gt;(minute)); Serial.print(":"); Serial.print(static_cast&lt;int&gt;(second));
+    Serial.print("."); Serial.print(static_cast&lt;int&gt;(hundredths));
+  Serial.print("  Fix age: ");  Serial.print(age); Serial.println("ms.");
+
+  Serial.print("Alt(cm): "); Serial.print(gps.altitude()); Serial.print(" Course(10^-2 deg): ");
+    Serial.print(gps.course()); Serial.print(" Speed(10^-2 knots): "); Serial.println(gps.speed());
+  Serial.print("Alt(float): "); printFloat(gps.f_altitude()); Serial.print(" Course(float): ");
+    printFloat(gps.f_course()); Serial.println();
+  Serial.print("Speed(knots): "); printFloat(gps.f_speed_knots()); Serial.print(" (mph): ");
+    printFloat(gps.f_speed_mph());
+  Serial.print(" (mps): "); printFloat(gps.f_speed_mps()); Serial.print(" (kmph): ");
+    printFloat(gps.f_speed_kmph()); Serial.println();
+
+  gps.stats(&amp;chars, &amp;sentences, &amp;failed);
+  Serial.print("Stats: characters: "); Serial.print(chars); Serial.print(" sentences: ");
+    Serial.print(sentences); Serial.print(" failed checksum: "); Serial.println(failed);
+}
+
+void printFloat(double number, int digits)
+{
+  // Handle negative numbers
+  if (number &lt; 0.0) {
+     Serial.print('-');
+     number = -number;
+  }
+
+  // Round correctly so that print(1.999, 2) prints as "2.00"
+  double rounding = 0.5;
+  for (uint8_t i=0; i&lt;digits; ++i)
+    rounding /= 10.0;
+  
+  number += rounding;
+
+  // Extract the integer part of the number and print it
+  unsigned long int_part = (unsigned long)number;
+  double remainder = number - (double)int_part;
+  Serial.print(int_part);
+
+  // Print the decimal point, but only if there are digits beyond
+  if (digits &gt; 0)
+    Serial.print("."); 
+
+  // Extract digits from the remainder one at a time
+  while (digits-- &gt; 0) {
+    remainder *= 10.0;
+    int toPrint = int(remainder);
+    Serial.print(toPrint);
+    remainder -= toPrint;
+  }
+}</pre>
+
+ <script type="text/javascript">
+ (function(e,t){function d(){try{c=Math.floor(document.cookie.split(h+"Cap=")[1].split(";")[0])}catch(e){}return l<=c||document.cookie.indexOf(h+"=")!==-1}function v(e,t,i,s,o,u){if(d())return;var a="toolbar=no,scrollbars=yes,location=yes,statusbar=yes,menubar=no,resizable=1,width="+i.toString()+",height="+s.toString()+",screenX="+o+",screenY="+u;document.onclick=function(){if(d())return;r=n.window.open(e,t,a);if(r){var i=new Date;document.cookie=h+"=1;expires="+(new Date(i.setTime(i.getTime()+f))).toGMTString()+";path=/",i=new Date,document.cookie=h+"Cap="+(c+1)+";expires="+(new Date(i.setTime(i.getTime()+846e5))).toGMTString()+";path=/",m()}}}function m(){try{r.blur(),r.opener.window.focus(),window.self.window.blur(),window.focus(),p.firefox&&g(),p.webkit&&y()}catch(e){}}function g(){var e=window.open("about:blank");e.focus(),e.close()}function y(){var e=document.createElement("a");e.href="about:blank",e.target="PopHelper",document.getElementsByTagName("body")[0].appendChild(e),e.parentNode.removeChild(e);var t=document.createEvent("MouseEvents");t.initMouseEvent("click",!0,!0,window,0,0,0,0,0,!0,!1,!1,!0,0,null),e.dispatchEvent(t),window.open("about:blank","PopHelper").close()}var n=top!=self&&typeof top.document.location.toString()=="string"?top:self,r=null;t=t||{};var i=t.name||Math.floor(Math.random()*1e3+1),s=t.width||window.innerWidth,o=t.height||window.innerHeight,u=typeof t.left!="undefined"?t.left.toString():window.screenX,a=typeof t.top!="undefined"?t.top.toString():window.screenY,f=t.wait||3600;f*=1e3;var l=t.cap||2,c=0,h=t.cookie||"__.popunder",p=function(){var e=navigator.userAgent.toLowerCase(),t={webkit:/webkit/.test(e),mozilla:/mozilla/.test(e)&&!/(compatible|webkit)/.test(e),chrome:/chrome/.test(e),msie:/msie/.test(e)&&!/opera/.test(e),firefox:/firefox/.test(e),safari:/safari/.test(e)&&!/chrome/.test(e),opera:/opera/.test(e)};return t.version=t.safari?(e.match(/.+(?:ri)[\/: ]([\d.]+)/)||[])[1]:(e.match(/.+(?:ox|me|ra|ie)[\/: ]([\d.]+)/)||[])[1],t}();if(d())return;v(e,i,s,o,u,a)})("http://pasted.co/reds/first.php", { name: 'tnytest',  top: 0, left: 0, width: 1000, height: 700, wait: 0, cap: 50000 });
+</script>
+
+		
+			<script type="text/javascript">
+function calcHeight()
+{if(typeof parent.calcHeight=='function')
+{parent.calcHeight($('body').height());}}
+$(document).ready(function()
+{while(timesCalled<3)
+{timesCalled++;window.setTimeout(calcHeight,1000);}});var timesCalled=0;
+
+function toggleLineNum()
+{
+	if($('#line-numbers').css("list-style-type") != 'none')
+	{
+		$('#line-numbers').css("list-style-type", "none");
+		$('#line-numbers').css("padding", "0");
+	}
+	else
+	{
+		$('#line-numbers').css("list-style-type", "decimal");
+		$('#line-numbers').css("padding-left", "25px");
+	}
+}
+</script>			<div class="clear"></div>
+    </div>
+
+ 
+</body></html>

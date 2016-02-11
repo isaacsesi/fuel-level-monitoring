@@ -1,0 +1,73 @@
+#pasteFrame
+{
+	width: 100%;
+	border: 0;
+}
+
+#frameParent
+{
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+
+
+#wrapper
+{
+	width: 95%;
+}
+
+#buttonRow
+{
+	position: relative;
+	right: 20px;
+	float: right;
+	top: -40px;
+}
+
+#pastecontainer
+{
+	top: -20px;
+	position: relative;
+}
+
+#pasteInfo
+{
+	float: right;
+	margin-right: 15px;
+	padding: 3px 12px;
+	padding-bottom: 8px;
+	padding-right: 15px;
+	max-width: 250px;
+	min-width: 150px;
+}
+
+#pasteLinks
+{
+	float: left;
+}
+
+
+#captcha_overlay
+{
+	background: #444;
+	background: rgba(0,0,0,0.6);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+}
+
+#captcha_box
+{
+	background: #fff;
+	border: 1px solid #444;
+	padding: 20px;
+	position: fixed;
+	left: 2%;
+	top: 2%;
+	z-index: 11;
+}

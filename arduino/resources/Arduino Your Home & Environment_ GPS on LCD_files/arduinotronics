@@ -1,0 +1,5 @@
+document.write('<p class="feedburnerFlareBlock">');
+document.write('<p class="feedburnerFlareBlock">');
+document.write('<a href="http://feedburner.google.com/fb/a/emailFlare?itemTitle\x3dGPS%20on%20LCD\x26uri\x3dhttp%3A%2F%2Farduinotronics.blogspot.com%2F2014%2F03%2Fgps-on-lcd.html" class="first">Email this</a>');
+document.write('<span> &#8226; </span><a href="http://feedburner.google.com/fb/a/emailFlare?to\x3dnoreply%40blogger.com\x26itemTitle\x3dGPS%20on%20LCD\x26uri\x3dhttp%3A%2F%2Farduinotronics.blogspot.com%2F2014%2F03%2Fgps-on-lcd.html">Email the author</a>');
+document.write('</p>');

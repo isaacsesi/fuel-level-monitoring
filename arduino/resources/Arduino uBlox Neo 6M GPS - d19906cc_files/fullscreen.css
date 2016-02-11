@@ -1,0 +1,38 @@
+body
+{
+	background: #fff;
+	color: #333;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+
+#fullwrapper
+{
+}
+
+#line-numbers
+{
+	margin: 0;
+	padding-left: 55px;
+}
+
+#line-numbers li
+{
+	margin: 0;
+}
+
+#thepaste
+{
+	font-family: monospace, "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+	white-space: pre-wrap;
+}
+
+
+.toolbar
+{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	text-align: right;
+}

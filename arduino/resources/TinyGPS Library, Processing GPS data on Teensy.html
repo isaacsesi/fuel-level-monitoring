@@ -1,0 +1,504 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0048)https://www.pjrc.com/teensy/td_libs_TinyGPS.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>TinyGPS Library, Processing GPS data on Teensy</title>
+<!--<base target="_top">--><base href="." target="_top">
+<link rel="shortcut icon" href="https://www.pjrc.com/favicon.ico">
+<link rel="icon" href="https://www.pjrc.com/favicon.ico">
+<link rel="stylesheet" href="./TinyGPS Library, Processing GPS data on Teensy_files/style.css" type="text/css">
+<meta name="MSSmartTagsPreventParsing" content="TRUE">
+<link rel="stylesheet" href="./TinyGPS Library, Processing GPS data on Teensy_files/td_libs.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" link="#0000D0" vlink="#202080" cz-shortcut-listen="true">
+<!--nav begin-->
+<!--htdig_noindex-->
+<table width="100%" cellspacing="2" cellpadding="0">
+<tbody><tr><td align="left" rowspan="2">
+<table cellspacing="0" cellpadding="0" width="312">
+<tbody><tr><td align="right">
+<a href="https://www.pjrc.com/teensy/td_libs_TinyGPS.html#navend"><img src="./TinyGPS Library, Processing GPS data on Teensy_files/1x1.gif" width="1" height="10" alt="skip navigational links" border="0" hspace="0" vspace="0"></a><a href="https://www.pjrc.com/"><img src="./TinyGPS Library, Processing GPS data on Teensy_files/logo.gif" alt="PJRC" width="276" height="31" border="0"></a></td></tr>
+</tbody></table>
+</td><td align="right" valign="top">
+</td></tr>
+<tr><td align="right" valign="bottom">
+<small>
+<a href="https://www.pjrc.com/cgi-bin/store/step1">Shopping&nbsp;Cart</a>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="" align="middle">
+<a href="https://www.pjrc.com/cgi-bin/store/step2">Checkout</a>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="" align="middle">
+<a href="https://www.pjrc.com/cgi-bin/store/shipcost">Shipping&nbsp;Cost</a>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="" align="middle">
+<a href="https://www.pjrc.com/cgi-bin/archive/summary">Download&nbsp;Website</a>
+</small>
+</td></tr></tbody></table>
+<table cellspacing="0" cellpadding="6" border="0" width="100%">
+<tbody><tr bgcolor="#D0E0FF">
+<td align="center"><a href="https://www.pjrc.com/">Home</a></td>
+<td align="center"><a href="https://www.pjrc.com/tech/mp3/">MP3 Player</a></td>
+<td align="center"><a href="https://www.pjrc.com/tech/8051/">8051 Tools</a></td>
+<td align="center"><a href="https://www.pjrc.com/tech/">All Projects</a></td>
+<td align="center"><a href="https://www.pjrc.com/store/">PJRC Store</a></td>
+<td align="center"><a href="https://www.pjrc.com/map.html">Site Map</a></td>
+</tr></tbody></table>
+<table cellspacing="0" cellpadding="2" width="100%">
+<tbody><tr bgcolor="#F0F0F0"><td align="left">
+<small>You are here:
+<a href="https://www.pjrc.com/teensy/">Teensy</a>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/b.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/teensyduino.html">Teensyduino</a>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/b.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs.html">Libraries</a>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/b.gif" width="10" height="10" alt="">
+<span style="background-color: #B0E4A8">TinyGPS</span>
+</small></td><td align="right">
+<!-- <small><a href="/search/">Search PJRC</a></small>
+ -->
+</td></tr></tbody></table>
+<p>
+</p><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr><td width="172" valign="top">
+<table width="172" border="0" cellspacing="0" cellpadding="6">
+<tbody><tr><td bgcolor="#D0E0FF" align="center">
+<big><b>PJRC Store</b></big>
+</td></tr>
+<tr><td bgcolor="#F0F0F0">
+<small>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="" align="middle">
+<a href="https://www.pjrc.com/store/teensy32.html">Teensy 3.2, $19.80</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="" align="middle">
+<a href="https://www.pjrc.com/store/teensylc.html">Teensy LC, $11.65</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="" align="middle">
+<a href="https://www.pjrc.com/store/teensy.html">Teensy 2.0, $16.00</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="" align="middle">
+<a href="https://www.pjrc.com/store/teensypp.html">Teensy++ 2.0, $24.00</a><br>
+</small></td></tr>
+<tr><td height="15"></td></tr>
+<tr><td bgcolor="#D0E0FF" align="center">
+<big><b>Teensy</b></big>
+</td></tr>
+<tr><td bgcolor="#F0F0F0">
+<small>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/index.html">Main Page</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/teensy31.html">Teensy 3.2 / 3.1</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/teensyLC.html">Teensy-LC</a><br>
+<a href="https://www.pjrc.com/teensy/first_use.html"><img src="./TinyGPS Library, Processing GPS data on Teensy_files/c.gif" width="10" height="10" alt="" border="0">
+<b>Getting Started</b></a><br>
+<a href="https://www.pjrc.com/teensy/pins.html"><img src="./TinyGPS Library, Processing GPS data on Teensy_files/c.gif" width="10" height="10" alt="" border="0">
+<b>How-To Tips</b></a><br>
+<a href="https://www.pjrc.com/teensy/usb_debug_only.html"><img src="./TinyGPS Library, Processing GPS data on Teensy_files/c.gif" width="10" height="10" alt="" border="0">
+<b>Code Library</b></a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/projects.html">Projects</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/b.gif" width="10" height="10" alt="">
+<b>Teensyduino</b><br>
+</small>
+<div style="padding-left: 1.2em">
+<small>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/teensyduino.html">Main</a><br>
+<a href="https://www.pjrc.com/teensy/tutorial.html"><img src="./TinyGPS Library, Processing GPS data on Teensy_files/c.gif" width="10" height="10" alt="" border="0">
+<b>Tutorial</b></a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_download.html">Download+Install</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_usage.html">Basic Usage</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_digital.html">Digital I/O</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_pulse.html">PWM &amp; Tone</a><br>
+<a href="https://www.pjrc.com/teensy/td_timing.html"><img src="./TinyGPS Library, Processing GPS data on Teensy_files/c.gif" width="10" height="10" alt="" border="0">
+<b>Timing</b></a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_serial.html">USB Serial</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_keyboard.html">USB Keyboard</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_mouse.html">USB Mouse</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_joystick.html">USB Joystick</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_midi.html">USB MIDI</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_flightsim.html">USB Flight Sim</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_uart.html">UART Serial</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/b.gif" width="10" height="10" alt="">
+<b>Libraries</b><br>
+</small>
+<div style="padding-left: 1.2em">
+<small>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs.html">Main List</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_GLCD.html">GLCD</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_LiquidCrystal.html">LiquidCrystal</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_OctoWS2811.html">OctoWS2811</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_FastSPI_LED.html">FastSPI_LED</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Matrix.html">Matrix/Sprite</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_LedDisplay.html">LedDisplay</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_LedControl.html">LedControl</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_DogLcd.html">DogLcd</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_ST7565.html">ST7565</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_AltSoftSerial.html">AltSoftSerial</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_NewSoftSerial.html">NewSoftSerial</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_SoftwareSerial.html">SoftwareSerial</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_MIDI.html">MIDI</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_PS2Keyboard.html">PS2Keyboard</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_DmxSimple.html">DmxSimple</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Firmata.html">Firmata</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Wire.html">Wire</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_SPI.html">SPI</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_OneWire.html">OneWire</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_XBee.html">XBee</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_VirtualWire.html">VirtualWire</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_x10.html">X10</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_IRremote.html">IRremote</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/b.gif" width="10" height="10" alt="selected">
+<span style="background-color: #B0E4A8">TinyGPS</span><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_USBHostShield.html">USBHostShield</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Ethernet.html">Ethernet</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Bounce.html">Bounce</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Keypad.html">Keypad</a><br>
+<a href="https://www.pjrc.com/teensy/td_libs_Audio.html"><img src="./TinyGPS Library, Processing GPS data on Teensy_files/c.gif" width="10" height="10" alt="" border="0">
+<b>Audio</b></a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">Encoder</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Ping.html">Ping</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_CapacitiveSensor.html">CapacitiveSensor</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_FreqCount.html">FreqCount</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_FreqMeasure.html">FreqMeasure</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Servo.html">Servo</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_PulsePosition.html">PulsePosition</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Stepper.html">Stepper</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_AccelStepper.html">AccelStepper</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_FrequencyTimer2.html">FrequencyTimer2</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Tlc5940.html">Tlc5940</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_SoftPWM.html">SoftPWM</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_ShiftPWM.html">ShiftPWM</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Time.html">Time</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_TimeAlarms.html">TimeAlarms</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_DS1307RTC.html">DS1307RTC</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_Metro.html">Metro</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_TimerOne.html">TimerOne</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_MsTimer2.html">MsTimer2</a><br>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/a.gif" width="10" height="10" alt="">
+<a href="https://www.pjrc.com/teensy/td_libs_EEPROM.html">EEPROM</a><br>
+</small>
+</div>
+<small>
+</small>
+</div>
+<small>
+<a href="https://www.pjrc.com/teensy/pinout.html"><img src="./TinyGPS Library, Processing GPS data on Teensy_files/c.gif" width="10" height="10" alt="" border="0">
+<b>Reference</b></a><br>
+</small></td></tr>
+<tr><td height="60"></td></tr>
+</tbody></table><br>
+<a name="navend"> </a>
+</td>
+<td width="18"></td>
+<td valign="top">
+<!--/htdig_noindex-->
+<!--nav end-->
+
+
+<h1>TinyGPS Library</h1>
+
+TinyGPS, by <a href="http://arduiniana.org/about/">Mikal Hart</a>, converts
+NEMA format global positioning data into easy-to-use variables for Latitude,
+Longitude, Time and other information.
+<p>
+<b>Download</b>: <a href="https://www.pjrc.com/teensy/arduino_libraries/TinyGPS.zip">TinyGPS.zip</a> (version 12)
+
+</p><h2>Hardware Requirements</h2>
+
+TinyGPS only converts data.  You must use <a href="https://www.pjrc.com/teensy/td_uart.html">UART Serial</a>
+or <a href="https://www.pjrc.com/teensy/td_libs_NewSoftSerial.html">NewSoftSerial</a> or some other way to
+obtain the NEMA format data to feed into TinyGPS.  Even though TinyGPS doesn't
+require any hardware, in practice, you will need a GPS module for the data source.
+<p>
+</p><table align="center"><tbody><tr><td>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/td_libs_TinyGPS.jpg">
+<br><small><b>
+</b></small></td></tr></tbody></table>
+<p>
+In this photo, a
+<a href="http://www.parallax.com/go/GPS">PMB-648 GPS module from Parallax</a>
+was used.  Since these GPS modules can run from either 5 or 3.3 volt power,
+and they feature TTL level serial signals that can connect directly to the
+Teensy's RX and TX pins, connecting them to Teensy is very easy.
+</p><p>
+</p><table align="center"><tbody><tr><td>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/td_libs_TinyGPS_2.jpg">
+<br><small><b>
+</b></small></td></tr></tbody></table>
+<p>
+For use with Teensy 3.0, most GPS modules output a 3.3 volt "TTL level" signal,
+even when powered from 5 volts.
+</p><p>
+</p><table align="center"><tbody><tr><td>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/td_libs_TinyGPS_3.png">
+<br><small><b>TTL level output is actually 2.8 volts, even with 5V power.
+</b></small></td></tr></tbody></table>
+<p>
+
+</p><h2>Basic Usage</h2>
+
+<span style="color: #CC6600;">TinyGPS</span> gps
+<p class="desc">
+Create the TinyGPS object, giving it a name of your choice.  While you could create
+multiple TinyGPS objects, it's unlikely you would need to decode more than one NEMA
+format data stream.
+</p>
+
+gps.<span style="color: #CC6600;">encode</span>(c)
+<p class="desc">
+Each byte of NEMA data must be giving to TinyGPS by using encode().  True is
+returned when new data has been fully decoded and can be used.
+</p>
+
+gps.<span style="color: #CC6600;">get_position</span>(&amp;latitude, &amp;longitude, &amp;age)
+<p class="desc">
+Get the position, where latitude and longitude are variables of long type, and the values
+are multiplied by 10,000.
+The age variable must be unsigned long type.
+</p>
+
+gps.<span style="color: #CC6600;">f_get_position</span>(&amp;flatitude, &amp;flongitude, &amp;age)
+<p class="desc">
+Get the position, where latitude and longitude are variables of float type, and the actual
+values are returned.  Float types are easier to use, but result in larger and slower code.
+The age variable must be unsigned long type.
+</p>
+
+Many other variables can be obtained.  Please refer to the
+<a href="http://arduiniana.org/libraries/tinygps/">official TinyGPS page</a>
+for complete documentation, or the example code to see how these are used.
+
+
+<h2>Example Program</h2>
+
+<table align="center"><tbody><tr><td>
+<img src="./TinyGPS Library, Processing GPS data on Teensy_files/td_libs_TinyGPS_s1.png">
+<br><small><b>
+</b></small></td></tr></tbody></table>
+<p>
+This example is a slightly modified version of the test program that
+comes in the examples directory with TinyGPS.  It uses Teensy's real
+serial port (UART) instead of NewSoftSerial.  Teensy also can transmit
+data rapidly on USB, so extra checking for input data that would be
+needed on Arduino's slow Serial object has been removed.
+</p><p>
+
+</p><pre>#include&nbsp;&lt;<span style="color: #CC6600;">TinyGPS</span>.h&gt;
+
+<span style="color: #7E7E7E;">/*&nbsp;This&nbsp;sample&nbsp;code&nbsp;demonstrates&nbsp;the&nbsp;normal&nbsp;use&nbsp;of&nbsp;a&nbsp;TinyGPS&nbsp;object.&nbsp;*/</span>
+<span style="color: #CC6600;">TinyGPS</span> gps;
+
+<span style="color: #7E7E7E;">/*&nbsp;On&nbsp;Teensy,&nbsp;the&nbsp;UART&nbsp;(real&nbsp;serial&nbsp;port)&nbsp;is&nbsp;always&nbsp;best&nbsp;to&nbsp;use.&nbsp;*/</span>
+<span style="color: #7E7E7E;">/*&nbsp;Unlike&nbsp;Arduino,&nbsp;there's&nbsp;no&nbsp;need&nbsp;to&nbsp;use&nbsp;NewSoftSerial&nbsp;because&nbsp;*/</span>
+<span style="color: #7E7E7E;">/*&nbsp;the&nbsp;"Serial"&nbsp;object&nbsp;uses&nbsp;the&nbsp;USB&nbsp;port,&nbsp;leaving&nbsp;the&nbsp;UART&nbsp;free.&nbsp;*/</span>
+HardwareSerial&nbsp;<span style="color: #CC6600;">Uart</span> = HardwareSerial();
+
+<span style="color: #CC6600;">void</span> gpsdump(<span style="color: #CC6600;">TinyGPS</span> &amp;gps);
+<span style="color: #CC6600;">void</span> printFloat(<span style="color: #CC6600;">double</span> f, <span style="color: #CC6600;">int</span> digits = 2);
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>setup</b></span>()
+{
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">begin</span>(115200);
+&nbsp;&nbsp;<span style="color: #CC6600;">Uart</span>.<span style="color: #CC6600;">begin</span>(4800);
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #CC6600;">delay</span>(1000);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Testing TinyGPS library v. "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #CC6600;">TinyGPS</span>::<span style="color: #CC6600;">library_version</span>());
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"by Mikal Hart"</span>);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Sizeof(gpsobject) = "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(sizeof(<span style="color: #CC6600;">TinyGPS</span>));
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+}
+
+<span style="color: #CC6600;">void</span> <span style="color: #CC6600;"><b>loop</b></span>()
+{
+&nbsp;&nbsp;bool&nbsp;newdata&nbsp;=&nbsp;<span style="color: #CC6600;">false</span>;
+&nbsp;&nbsp;<span style="color: #CC6600;">unsigned</span> <span style="color: #CC6600;">long</span> start = <span style="color: #CC6600;">millis</span>();
+
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Every 5 seconds we print an update</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">while</span> (<span style="color: #CC6600;">millis</span>() - start &lt; 5000) {
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">if</span> (<span style="color: #CC6600;">Uart</span>.<span style="color: #CC6600;">available</span>()) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">char</span> c = <span style="color: #CC6600;">Uart</span>.<span style="color: #CC6600;">read</span>();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">// Serial.print(c);  // uncomment to see raw GPS data</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">if</span> (gps.<span style="color: #CC6600;">encode</span>(c)) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newdata&nbsp;=&nbsp;<span style="color: #CC6600;">true</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #7E7E7E;">// break;  // uncomment to print new data immediately!</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;}
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span> (newdata) {
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"Acquired Data"</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"-------------"</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;gpsdump(gps);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"-------------"</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+&nbsp;&nbsp;}
+}
+
+<span style="color: #CC6600;">void</span> gpsdump(<span style="color: #CC6600;">TinyGPS</span> &amp;gps)
+{
+&nbsp;&nbsp;<span style="color: #CC6600;">long</span> lat, lon;
+&nbsp;&nbsp;<span style="color: #CC6600;">float</span> flat, flon;
+&nbsp;&nbsp;<span style="color: #CC6600;">unsigned</span> <span style="color: #CC6600;">long</span> age, date, time, chars;
+&nbsp;&nbsp;<span style="color: #CC6600;">int</span> year;
+&nbsp;&nbsp;<span style="color: #CC6600;">byte</span> month, day, hour, minute, second, hundredths;
+&nbsp;&nbsp;<span style="color: #CC6600;">unsigned</span> <span style="color: #CC6600;">short</span> sentences, failed;
+
+&nbsp;&nbsp;gps.<span style="color: #CC6600;">get_position</span>(&amp;lat, &amp;lon, &amp;age);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Lat/Long(10^-5 deg): "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(lat); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">", "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(lon); 
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" Fix age: "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(age); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"ms."</span>);
+&nbsp;&nbsp;
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// On Arduino, GPS characters may be lost during lengthy Serial.print()</span>
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// On Teensy, Serial prints to USB, which has large output buffering and</span>
+&nbsp;&nbsp;<span style="color: #7E7E7E;">//   runs very fast, so it's not necessary to worry about missing 4800</span>
+&nbsp;&nbsp;<span style="color: #7E7E7E;">//   baud GPS characters.</span>
+
+&nbsp;&nbsp;gps.<span style="color: #CC6600;">f_get_position</span>(&amp;flat, &amp;flon, &amp;age);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Lat/Long(float): "</span>); printFloat(flat, 5); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">", "</span>); printFloat(flon, 5);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" Fix age: "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(age); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"ms."</span>);
+
+&nbsp;&nbsp;gps.<span style="color: #CC6600;">get_datetime</span>(&amp;date, &amp;time, &amp;age);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Date(ddmmyy): "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(date); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" Time(hhmmsscc): "</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(time);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" Fix age: "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(age); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"ms."</span>);
+
+&nbsp;&nbsp;gps.<span style="color: #CC6600;">crack_datetime</span>(&amp;year, &amp;month, &amp;day, &amp;hour, &amp;minute, &amp;second, &amp;hundredths, &amp;age);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Date: "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(static_cast&lt;<span style="color: #CC6600;">int</span>&gt;(month)); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"/"</span>); 
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(static_cast&lt;<span style="color: #CC6600;">int</span>&gt;(day)); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"/"</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(year);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"  Time: "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(static_cast&lt;<span style="color: #CC6600;">int</span>&gt;(hour)); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">":"</span>); 
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(static_cast&lt;<span style="color: #CC6600;">int</span>&gt;(minute)); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">":"</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(static_cast&lt;<span style="color: #CC6600;">int</span>&gt;(second));
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"."</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(static_cast&lt;<span style="color: #CC6600;">int</span>&gt;(hundredths));
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"  Fix age: "</span>);  <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(age); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(<span style="color: #006699;">"ms."</span>);
+
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Alt(cm): "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(gps.<span style="color: #CC6600;">altitude</span>()); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" Course(10^-2 deg): "</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(gps.<span style="color: #CC6600;">course</span>()); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" Speed(10^-2 knots): "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(gps.<span style="color: #CC6600;">speed</span>());
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Alt(float): "</span>); printFloat(gps.<span style="color: #CC6600;">f_altitude</span>()); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" Course(float): "</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;printFloat(gps.<span style="color: #CC6600;">f_course</span>()); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Speed(knots): "</span>); printFloat(gps.<span style="color: #CC6600;">f_speed_knots</span>()); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" (mph): "</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;printFloat(gps.<span style="color: #CC6600;">f_speed_mph</span>());
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" (mps): "</span>); printFloat(gps.<span style="color: #CC6600;">f_speed_mps</span>()); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" (kmph): "</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;printFloat(gps.<span style="color: #CC6600;">f_speed_kmph</span>()); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>();
+
+&nbsp;&nbsp;gps.<span style="color: #CC6600;">stats</span>(&amp;chars, &amp;sentences, &amp;failed);
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"Stats: characters: "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(chars); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" sentences: "</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(sentences); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">" failed checksum: "</span>); <span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">println</span>(failed);
+}
+
+<span style="color: #CC6600;">void</span> printFloat(<span style="color: #CC6600;">double</span> number, <span style="color: #CC6600;">int</span> digits)
+{
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Handle negative numbers</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span> (number &lt; 0.0) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">'-'</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;=&nbsp;-number;
+&nbsp;&nbsp;}
+
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Round correctly so that print(1.999, 2) prints as "2.00"</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">double</span> rounding = 0.5;
+&nbsp;&nbsp;<span style="color: #CC6600;">for</span> (uint8_t i=0; i&lt;digits; ++i)
+&nbsp;&nbsp;&nbsp;&nbsp;rounding&nbsp;/=&nbsp;10.0;
+&nbsp;&nbsp;
+&nbsp;&nbsp;number&nbsp;+=&nbsp;rounding;
+
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Extract the integer part of the number and print it</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">unsigned</span> <span style="color: #CC6600;">long</span> int_part = (<span style="color: #CC6600;">unsigned</span> <span style="color: #CC6600;">long</span>)number;
+&nbsp;&nbsp;<span style="color: #CC6600;">double</span> remainder = number - (<span style="color: #CC6600;">double</span>)int_part;
+&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(int_part);
+
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Print the decimal point, but only if there are digits beyond</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">if</span> (digits &gt; 0)
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(<span style="color: #006699;">"."</span>); 
+
+&nbsp;&nbsp;<span style="color: #7E7E7E;">// Extract digits from the remainder one at a time</span>
+&nbsp;&nbsp;<span style="color: #CC6600;">while</span> (digits-- &gt; 0) {
+&nbsp;&nbsp;&nbsp;&nbsp;remainder&nbsp;*=&nbsp;10.0;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;">int</span> toPrint = <span style="color: #CC6600;">int</span>(remainder);
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CC6600;"><b>Serial</b></span>.<span style="color: #CC6600;">print</span>(toPrint);
+&nbsp;&nbsp;&nbsp;&nbsp;remainder&nbsp;-=&nbsp;toPrint;
+&nbsp;&nbsp;}
+}
+</pre>
+
+<h2><a name="timer">Timing Required For Reliable Data</a></h2>
+
+NEMA format GPS data is usually transmitted at 4800 baud, in 8N1 format.  The
+resulting maximum incoming speed is 480 bytes per second.  By default, Teensyduino's
+<a href="https://www.pjrc.com/teensy/td_uart.html">UART Serial</a> buffers up to 64 bytes, or 0.133 seconds of
+incoming data.
+<p>
+If your program must perform some operation for more than 0.13 seconds, it should
+check for new data and give it to TinyGPS with gps.encode() within that time period.
+</p><p>
+Alternately, the buffer size may be increased.  Inside hardware/teensy/cores/teensy/HardwareSerial.cpp,
+the buffer size is defined with:
+</p><pre>  #define RX_BUFFER_SIZE 64
+  static volatile uint8_t rx_buffer[RX_BUFFER_SIZE];
+  static volatile uint8_t rx_buffer_head = 0;
+  static volatile uint8_t rx_buffer_tail = 0;
+</pre>
+<p>
+The buffer may be increased to as much as 255 bytes.
+
+</p><h2>TinyGPS Documentation</h2>
+
+The <a href="http://arduiniana.org/libraries/tinygps/">official TinyGPS page by Mikal Hart</a> has
+very detailed information about using TinyGPS.
+
+
+
+</td></tr></tbody></table>
+
+</body></html>
