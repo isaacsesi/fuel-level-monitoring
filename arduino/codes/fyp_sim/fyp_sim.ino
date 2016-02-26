@@ -13,7 +13,7 @@
 
 #define GPS_TX 9
 #define GPS_RX 8
-#define GPSBAUD 4800
+#define GPSBAUD 9600
 
  
 const int TRIGGER_PIN = 7;
@@ -22,19 +22,19 @@ const int ECHO_PIN  =  6;
 const int MAX_DISTANCE = 200;
 const int SAMPLE_INTERVAL = 25;
 const int PING_ITERATIONS = 3;
-const int UPDATE_INTERVAL = 1500;
+/*const int UPDATE_INTERVAL = 1500;
 
 int previousMillis = 0;
 int incomingByte = 0;
-
+*/
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
-TinyGPS gps;
+/*TinyGPS gps;
 SoftwareSerial nss(GPS_RX , GPS_TX);
- 
+ */
 void setup() {
-   Serial.begin(57600);
-   nss.begin(GPSBAUD);
+   Serial.begin(9600);
+  /* nss.begin(GPSBAUD);
   lcd.begin(20, 4);
   Serial.println("");
   Serial.println("Initializing GPS");
@@ -50,17 +50,17 @@ void setup() {
   lcd.setCursor(1,6);
   lcd.print("SUCCESS!");
   delay(100);
-  lcd.clear();
-  getFuelLevel();
-   getGPSLocation();
+  lcd.clear();*/
 
 }
  
 void loop() {
-checkAlertInterval();
+  float t = sonar.ping_median(PING_ITERATIONS);                 // microseconds
+  float d = sonar.convert_cm(t);          // centimeters
+  Serial.println(d);
 }
 
-
+/*
 void checkAlertInterval()
 {
   
@@ -94,13 +94,9 @@ void checkAlertInterval()
 
 
 void getFuelLevel(){
-  int t = sonar.ping_median(PING_ITERATIONS);                 // microseconds
-  int d = sonar.convert_cm(t);          // centimeters
-  Serial.println("");
-  Serial.print("Fuel level is "); Serial.print(sonar.convert_cm(t)); Serial.print("cm");
-  Serial.println("");
-  lcd.setCursor(1,0);
-  lcd.println("Fuel level is "); lcd.print(d); lcd.print("cm");
+   float t = sonar.ping_median(PING_ITERATIONS);                 // microseconds
+  float d = sonar.convert_cm(t);          // centimeters
+  Serial.println(d);
 }
 
 
@@ -135,3 +131,4 @@ void getGPSLocation(){
     }
   }
 }
+*/
