@@ -41,7 +41,9 @@ void setup() {
   Serial.println("-----------------------------------");
   Serial.println("");
   lcd.clear();
-  lcd.print("Current Level:"); lcd.print(previousLevel);lcd.print(" ltr");
+    lcd.print("Current Level:");
+   lcd.setCursor(1,3);
+   lcd.print(previousLevel);lcd.print(" litres");
 }
 
 
@@ -57,9 +59,10 @@ void checkFuelLevelChange(){
   int currentLevel = getFuelLevel();
      if(abs(currentLevel - previousLevel >= FUEL_DIFFERENCE)){
       sendSMSAlert(1);
+    } 
+      previousLevel = currentLevel;
       return;
-    } else
-        return;
+        
   
 }
 
@@ -90,28 +93,33 @@ void sendSMSAlert(int a){
     getGPSData();
 
   if(a == 1){
+    Serial.println("-----------------------------");
     Serial.println("Significant Change Detected:");
     Serial.println("-----------------------------");
-    Serial.print("Current Fuel level is ");Serial.print(currentFuelLevel); Serial.println("litres");
-    Serial.print("Tanker is currently at ");Serial.print(flat); Serial.print(",");Serial.println(flon);
+    Serial.print("Current Fuel level is ");Serial.print(currentFuelLevel); Serial.println(" litres");
+    Serial.print("Tanker is currently at ");Serial.print(flat, 6); Serial.print(",");Serial.println(flon, 6);
     Serial.println("");
     
   } else if(a == 2){
+    Serial.println("-------------------------");
     Serial.println("Response to System Query:");
     Serial.println("-------------------------");
-    Serial.print("Current Fuel level is ");Serial.print(currentFuelLevel); Serial.println("litres");
-    Serial.print("Tanker is currently at ");Serial.print(flat); Serial.print(",");Serial.println(flon);
+    Serial.print("Current Fuel level is ");Serial.print(currentFuelLevel); Serial.println(" litres");
+    Serial.print("Tanker is currently at ");Serial.print(flat, 6); Serial.print(",");Serial.println(flon, 6);
     Serial.println("");
   }
 
   else if(a == 3){
+    Serial.println("--------------");
     Serial.println("System Status:");
-    Serial.println("-----------------");
-    Serial.print("Current Fuel level is ");Serial.print(currentFuelLevel); Serial.println("litres");
-    Serial.print("Tanker is currently at ");Serial.print(flat); Serial.print(",");Serial.println(flon);
+    Serial.println("---------------");
+    Serial.print("Current Fuel level is ");Serial.print(currentFuelLevel); Serial.println(" litres");
+    Serial.print("Tanker is currently at ");Serial.print(flat, 6); Serial.print(",");Serial.println(flon, 6);
     Serial.println("");
     lcd.clear();
-    lcd.print("Current Level:"); lcd.print(currentFuelLevel);lcd.print(" ltr");
+    lcd.print("Current Level:");
+   lcd.setCursor(1,3);
+   lcd.print(currentFuelLevel);lcd.print(" litres");
   }
  
 }
@@ -128,12 +136,13 @@ int getFuelLevel(){
   pinMode(echoPin, INPUT);
   duration = pulseIn(echoPin, HIGH);
   int level = duration /29 /2;
-  
+  return level;
+  /*
   if(level >= MIN_DISTANCE && level <= MAX_DISTANCE){
     return level;
   } else {
     return -1;
-  } 
+  }*/ 
 }
 
 
@@ -177,5 +186,6 @@ void getGPSData(){
   Serial.println(failed);
   */
   if (chars == 0)
-    Serial.println("** No characters received from GPS: check wiring **");
+    Serial.println("** No data received from the GPS Module. Please check the connections **");
+    Serial.println("");
 }
