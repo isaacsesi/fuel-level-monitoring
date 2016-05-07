@@ -37,7 +37,7 @@ void setup() {
   Serial.println("SYSTEM STATUS: GSM OK, GPS OK");
   Serial.println();
   previousLevel = getFuelLevel(); 
-  Serial.print("Initial Fuel level is: "); Serial.println(previousLevel);
+  Serial.print("Initial Fuel level is: "); Serial.print(previousLevel); Serial.println("  litres");
   Serial.println("-----------------------------------");
   Serial.println("");
   lcd.clear();
