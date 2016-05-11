@@ -4,8 +4,7 @@
 const int trigPin = 7;
 const int echoPin = 6;
 long duration, cm;
-const int MAX_DISTANCE = 100;
-const int MIN_DISTANCE = 0;
+
 const long INTERVAL = 5000;
 const int FUEL_DIFFERENCE = 50;
 
@@ -61,9 +60,6 @@ void checkFuelLevelChange(){
       sendSMSAlert(1);
     } 
       previousLevel = currentLevel;
-      return;
-        
-  
 }
 
 void checkForSystemQuery(){
@@ -126,16 +122,31 @@ void sendSMSAlert(int a){
 
 
 
-int getFuelLevel(){
-  pinMode(trigPin, OUTPUT);
+float getFuelLevel(){
+
+  
+pinMode(trigPin, OUTPUT);
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
   pinMode(echoPin, INPUT);
-  duration = pulseIn(echoPin, HIGH);
-  int level = duration /29 /2;
+float  duration = pulseIn(echoPin, HIGH);
+float level = duration /29 /2;
+
+
+
+float xMin = 3.0;
+float xMax = 18.6;
+float yMin = 0;
+float yMax = 1000;
+float volume = ((level - xMin)*(yMin - yMax)/(xMax-xMin) + yMax);
+
+
+ Serial.print(level);Serial.print("      "); Serial.println(volume);
+  
+
   return level;
   /*
   if(level >= MIN_DISTANCE && level <= MAX_DISTANCE){
